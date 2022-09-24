@@ -10,11 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/mongoose": "^5.11.97",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "express-session": "^1.17.3",
     "express-ws": "^5.0.2",
+    "mongoose": "^6.6.1",
     "passport": "^0.6.0",
     "passport-google-oauth": "^2.0.0"
   },
