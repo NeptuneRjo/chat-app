@@ -3,10 +3,13 @@ import cors from 'cors'
 import session from 'express-session'
 import passport from 'passport'
 import { Server } from 'socket.io'
-import './config/mongoConfig'
-import 'dotenv/config'
 import { connection } from 'mongoose'
 import { createServer } from 'http'
+import { auth, auth as authRoutes } from './routes'
+
+import './config/mongoConfig'
+import 'dotenv/config'
+import './config/passport'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -16,8 +19,19 @@ const io = new Server(httpServer, {})
 /* <-- Middleware --> */
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(
+	session({
+		secret: process.env.EXPRESS_SESSION_SECRET as string,
+		resave: false,
+		saveUninitialized: true,
+		cookie: { secure: false },
+	})
+)
+app.use(passport.initialize())
+app.use(passport.session())
 
 /* <-- Routes --> */
+app.use('/auth', authRoutes)
 
 /* <-- Server --> */
 connection.on('connected', () => {
