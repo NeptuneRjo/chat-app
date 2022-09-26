@@ -11,7 +11,7 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID as string,
 			clientSecret: GOOGLE_CLIENT_SECRET as string,
-			callbackURL: 'http://localhost:4000/google/callback',
+			callbackURL: 'http://localhost:4000/auth/google/callback',
 			passReqToCallback: true,
 		},
 		function (
