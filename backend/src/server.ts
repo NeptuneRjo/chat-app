@@ -5,7 +5,7 @@ import passport from 'passport'
 import { Server } from 'socket.io'
 import { connection } from 'mongoose'
 import { createServer } from 'http'
-import { auth as authRoutes } from './routes'
+import { auth, auth as authRoutes } from './routes'
 
 import './config/mongoConfig'
 import 'dotenv/config'
@@ -31,7 +31,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 /* <-- Routes --> */
-app.use('/', authRoutes)
+app.use('/auth', authRoutes)
 
 /* <-- Server --> */
 connection.on('connected', () => {
