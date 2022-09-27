@@ -1,14 +1,19 @@
 import { Router } from 'express'
-import { Message, Room } from '../models'
+import {
+	get_room,
+	post_new_message,
+	post_new_room,
+	delete_room,
+	post_new_member,
+} from '../controllers/chatControllers'
 
 const router = Router()
 
-router
-	.route('/:id')
-	.get((req, res) => res.send(`GET all messages in room:${req.params.id}`))
-	.patch((req, res) => res.send('PATCH new room'))
-	.delete((req, res) => res.send('DELETE room'))
+router.route('/:id').get(get_room).delete(delete_room)
 
-router.route('/new-room').post((req, res) => res.send('POST new room'))
+router.route('/:id/new-message').patch(post_new_message)
+router.route('/:id/new-user').patch(post_new_member)
+
+router.route('/new-room').post(post_new_room)
 
 export default router

@@ -3,7 +3,7 @@ import { Schema, model } from 'mongoose'
 const messageModel = new Schema({
 	handle: { type: String, required: true },
 	message: { type: String, required: true },
-	data: {
+	date: {
 		type: Date,
 		default: Date.now(),
 	},

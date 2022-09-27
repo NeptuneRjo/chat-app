@@ -4,7 +4,7 @@ const mongoose_1 = require("mongoose");
 const messageModel = new mongoose_1.Schema({
     handle: { type: String, required: true },
     message: { type: String, required: true },
-    data: {
+    date: {
         type: Date,
         default: Date.now(),
     },
