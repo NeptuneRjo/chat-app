@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const chatControllers_1 = require("../controllers/chatControllers");
 const router = (0, express_1.Router)();
-router
-    .route('/:id')
-    .get((req, res) => res.send(`GET all messages in room:${req.params.id}`))
-    .patch((req, res) => res.send('PATCH new room'))
-    .delete((req, res) => res.send('DELETE room'));
-router.route('/new-room').post((req, res) => res.send('POST new room'));
+router.route('/:id').get(chatControllers_1.get_room).delete(chatControllers_1.delete_room);
+router.route('/:id/new-message').patch(chatControllers_1.post_new_message);
+router.route('/:id/new-user').patch(chatControllers_1.post_new_member);
+router.route('/new-room').post(chatControllers_1.post_new_room);
 exports.default = router;
