@@ -8,3 +8,11 @@
     --background-secondary: #222823;
     --primary: #5ca4a9;
 }
+
+* {
+    background-color: var(--background);
+    font-family: var(--font-family);
+    color: var(--font-primary);
+    padding: 0;
+    margin: 0;
+}
