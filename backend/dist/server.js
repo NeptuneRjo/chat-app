@@ -29,7 +29,8 @@ app.use((0, express_session_1.default)({
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
 /* <-- Routes --> */
-app.use('/auth', routes_1.auth);
+app.use('/auth', routes_1.authRoutes);
+app.use('/chat', routes_1.chatRoutes);
 /* <-- Server --> */
 mongoose_1.connection.on('connected', () => {
     httpServer.listen(port, () => {
