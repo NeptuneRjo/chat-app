@@ -27,7 +27,7 @@ function App() {
 	return (
 		<HashRouter>
 			<div className='app-main bg-dark'>
-				<Menu user={user} />
+				<Menu user={user} setUser={setUser} />
 				<Routes>
 					<Route path='/' element={<Room user={user} />} />
 				</Routes>
