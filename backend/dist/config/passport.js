@@ -15,7 +15,14 @@ passport_1.default.use(new passport_google_oauth2_1.Strategy({
     callbackURL: 'http://localhost:4000/auth/google/callback',
     passReqToCallback: true,
 }, function (request, accessToken, refreshToken, profile, done) {
-    models_1.User.findOneAndUpdate({ googleId: profile.id }, { $set: { googleId: profile.id, picture: profile.picture } }, { upsert: true }, (err, user) => {
+    models_1.User.findOneAndUpdate({ googleId: profile.id }, {
+        $set: {
+            googleId: profile.id,
+            picture: profile.picture,
+            displayName: profile.displayName,
+        },
+    }, { upsert: true }, (err, user) => {
+        console.log(user);
         return done(err, user);
     });
 }));

@@ -15,8 +15,7 @@ const Message: React.FC<Props> = ({ message, user }: Props) => {
 				{message.message}
 			</Card.Text>
 			<Card.Footer id='message-footer'>
-				<img id='message-image' src={`${message.author.picture}`} />
-				<small id='message-name'>{message.author.displayName}</small>
+				<small id='message-name'>{message.handle}</small>
 			</Card.Footer>
 		</Card>
 	)

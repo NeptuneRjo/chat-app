@@ -1,8 +1,8 @@
 import { model, Schema } from 'mongoose'
 
 const roomModel = new Schema({
-	members: { type: Array },
 	messages: { type: Array },
+	roomId: { type: String },
 })
 
 const Room = model('Room', roomModel)
