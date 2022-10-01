@@ -13,17 +13,17 @@ const isLoggedIn = (req, res, next) => {
 router.get('/google', passport_1.default.authenticate('google', { scope: ['email', 'profile'] }));
 router.get('/logout', (req, res, next) => {
     req.session.destroy(() => {
-        console.log(req.user);
         res.send('Goodbye');
     });
 });
-router.get('/google/callback', passport_1.default.authenticate('google'), (req, res) => {
-    if (req.user) {
-        res.send(200).json({ data: req.user });
-    }
-    else {
-        res.send(400).json({ error: 'Unable to log in at this time' });
-    }
+router.get('/google/callback', passport_1.default.authenticate('google', {
+    successRedirect: 'http://localhost:3000/',
+    failureRedirect: '/auth/failure',
+}));
+router.get('/login', (req, res) => {
+    res.status(200).json({
+        data: req.user,
+    });
 });
 router.get('/failure', (req, res) => {
     res.send('something went wrong');
