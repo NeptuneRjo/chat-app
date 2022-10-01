@@ -28,9 +28,9 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
 						<NavDropdown title='Rooms' id='basic-nav-dropdown'>
-							<NavDropdown.Item href='chat-room/1'>Room 1</NavDropdown.Item>
-							<NavDropdown.Item href='chat-room/2'>Room 2</NavDropdown.Item>
-							<NavDropdown.Item href='chat-room/3'>Room 3</NavDropdown.Item>
+							<NavDropdown.Item href='#/chat/room-1'>Room 1</NavDropdown.Item>
+							<NavDropdown.Item href='#/chat/room-2'>Room 2</NavDropdown.Item>
+							<NavDropdown.Item href='#/chat/room-3'>Room 3</NavDropdown.Item>
 						</NavDropdown>
 						{user === undefined ? (
 							<Nav.Link onClick={() => login()}>Sign in</Nav.Link>
