@@ -16,7 +16,7 @@ router.get(
 
 router.get('/logout', (req, res, next) => {
 	req.session.destroy(() => {
-		res.send('Goodbye')
+		res.status(200).json({ data: req.user })
 	})
 })
 
