@@ -1,9 +1,14 @@
 import React from 'react'
 import { Container, Col, Row, InputGroup, Form } from 'react-bootstrap'
 import { Message } from '../../Components'
+import { UserInterface } from '../../types'
 import './style.css'
 
-const Room = () => {
+type Props = {
+	user: UserInterface | undefined
+}
+
+const Room: React.FC<Props> = ({ user }: Props) => {
 	const messages = [
 		{
 			author: {
@@ -32,15 +37,15 @@ const Room = () => {
 		<Container className='p-3' id='room-main'>
 			<h3 className='p-2'>Chat Room 1</h3>
 			<Row id='chat-container' className='bg-light pt-3'>
-				{messages.map((message, index) => (
-					<Row>
+				{messages.map((message, key) => (
+					<Row key={key}>
 						<Col id='chat-incoming'>
-							{message.author.displayName !== 'King Neptune' && (
+							{message.author.displayName !== user?.displayName && (
 								<Message message={message} user={false} />
 							)}
 						</Col>
 						<Col id='chat-outgoing'>
-							{message.author.displayName === 'King Neptune' && (
+							{message.author.displayName === user?.displayName && (
 								<Message message={message} user={true} />
 							)}
 						</Col>
