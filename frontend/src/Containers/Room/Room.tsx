@@ -1,51 +1,60 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Col, Row, InputGroup, Form } from 'react-bootstrap'
 import { Message } from '../../Components'
-import { UserInterface } from '../../types'
+import { MessageInterface, UserInterface } from '../../types'
+import { useNavigate, useParams } from 'react-router-dom'
 import './style.css'
+import { getRoom } from '../../Api'
 
 type Props = {
 	user: UserInterface | undefined
 }
 
 const Room: React.FC<Props> = ({ user }: Props) => {
-	const messages = [
-		{
-			author: {
-				displayName: 'King Pluto',
-				googleId: '1',
-				picture:
-					'https://lh3.googleusercontent.com/a-/ACNPEu-RdBeRgT0gWX-vQ21CoLJ-XjT8WdTRJI9iLPhLsw=s96-c',
-			},
-			message: 'Goodbye world',
-			date: '16 days ago',
-		},
-		{
-			author: {
-				displayName: 'King Neptune',
-				googleId: '1',
-				picture:
-					'https://lh3.googleusercontent.com/a-/ACNPEu-RdBeRgT0gWX-vQ21CoLJ-XjT8WdTRJI9iLPhLsw=s96-c',
-			},
-			message:
-				'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laborum error facilis voluptatibus quibusdam doloribus natus qui explicabo expedita recusand',
-			date: '20 days ago',
-		},
-	]
+	const { id } = useParams()
+
+	const titleProperties = id?.split('-')
+	let title: string = '1'
+
+	if (titleProperties) {
+		title = titleProperties[1]
+	}
+
+	const navigate = useNavigate()
+
+	const [messages, setMessages] = useState<MessageInterface[]>([])
+	const [roomError, setRoomError] = useState<unknown | null>(null)
+
+	useEffect(() => {
+		;(async () => {
+			const response = await getRoom(id as string)
+			const json = await response.json()
+
+			if (!response.ok) {
+				setRoomError(json.err)
+			} else {
+				setMessages(json.data.messages)
+			}
+
+			if (roomError) {
+				navigate('/404-not-found')
+			}
+		})()
+	}, [])
 
 	return (
 		<Container className='p-3' id='room-main'>
-			<h3 className='p-2'>Chat Room 1</h3>
+			<h3 className='p-2'>Chat Room {title}</h3>
 			<Row id='chat-container' className='bg-light pt-3'>
 				{messages.map((message, key) => (
 					<Row key={key}>
 						<Col id='chat-incoming'>
-							{message.author.displayName !== user?.displayName && (
+							{message.handle !== user?.displayName && (
 								<Message message={message} user={false} />
 							)}
 						</Col>
 						<Col id='chat-outgoing'>
-							{message.author.displayName === user?.displayName && (
+							{message.handle === user?.displayName && (
 								<Message message={message} user={true} />
 							)}
 						</Col>
