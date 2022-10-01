@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Menu, Room } from './Containers'
 import 'bootswatch/dist/lux/bootstrap.min.css'
 import { getUser } from './Api'
@@ -29,7 +29,8 @@ function App() {
 			<div className='app-main bg-dark'>
 				<Menu user={user} setUser={setUser} />
 				<Routes>
-					<Route path='/' element={<Room user={user} />} />
+					<Route path='/chat/:id' element={<Room user={user} />} />
+					<Route path='/' element={<Navigate to='/chat/room-1' />} />
 				</Routes>
 			</div>
 		</HashRouter>
