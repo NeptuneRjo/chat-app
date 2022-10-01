@@ -1,19 +1,18 @@
 import React from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { Navbar } from './containers'
+import { Menu, Room } from './Containers'
+import 'bootswatch/dist/lux/bootstrap.min.css'
+
 import './App.css'
 
 function App() {
 	return (
 		<HashRouter>
-			<div className='app-main'>
-				<Navbar />
-				<div className='app-content'>
-					<div className='rooms'></div>
-					<Routes>
-						<Route element={<div className='chat-room'></div>}></Route>
-					</Routes>
-				</div>
+			<div className='app-main bg-dark'>
+				<Menu />
+				<Routes>
+					<Route path='/' element={<Room />} />
+				</Routes>
 			</div>
 		</HashRouter>
 	)
