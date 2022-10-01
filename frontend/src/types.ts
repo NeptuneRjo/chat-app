@@ -5,7 +5,7 @@ export interface RoomInterface {
 }
 
 export interface MessageInterface {
-	author: UserInterface
+	handle: string
 	message: string
 	date: string
 }
