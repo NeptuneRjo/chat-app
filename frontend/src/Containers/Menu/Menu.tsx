@@ -3,12 +3,12 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
 
 type Props = {
-	user: UserInterface
+	user: UserInterface | undefined
 }
 
-const Menu: React.FC = ({}) => {
-	const user = {
-		displayName: 'King Neptune',
+const Menu: React.FC<Props> = ({ user }: Props) => {
+	const login = async () => {
+		window.open('http://localhost:4000/auth/google', '_self')
 	}
 
 	return (
@@ -24,10 +24,12 @@ const Menu: React.FC = ({}) => {
 							<NavDropdown.Item href='chat-room/3'>Room 3</NavDropdown.Item>
 						</NavDropdown>
 						{user === undefined ? (
-							<Nav.Link href='/user-auth'>Sign in</Nav.Link>
+							<Nav.Link onClick={() => login()}>Sign in</Nav.Link>
 						) : (
 							<Navbar.Collapse className='justify-content-end'>
-								<Navbar.Text>Signed in as {user.displayName}</Navbar.Text>
+								<Navbar.Text className='text-white'>
+									Signed in as {user.displayName}
+								</Navbar.Text>
 								<Nav.Link href='/user-auth/sign-out'>Sign Out</Nav.Link>
 							</Navbar.Collapse>
 						)}
