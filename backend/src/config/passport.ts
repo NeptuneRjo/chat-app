@@ -23,9 +23,16 @@ passport.use(
 		) {
 			User.findOneAndUpdate(
 				{ googleId: profile.id },
-				{ $set: { googleId: profile.id, picture: profile.picture } },
+				{
+					$set: {
+						googleId: profile.id,
+						picture: profile.picture,
+						displayName: profile.displayName,
+					},
+				},
 				{ upsert: true },
 				(err: any, user: any) => {
+					console.log(user)
 					return done(err, user)
 				}
 			)
