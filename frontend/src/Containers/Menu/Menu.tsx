@@ -1,14 +1,23 @@
 import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
+import { logoutUser } from '../../Api'
 
 type Props = {
 	user: UserInterface | undefined
+	setUser: React.Dispatch<React.SetStateAction<UserInterface | undefined>>
 }
 
-const Menu: React.FC<Props> = ({ user }: Props) => {
+const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const login = async () => {
 		window.open('http://localhost:4000/auth/google', '_self')
+	}
+
+	const logout = async () => {
+		const response = await logoutUser()
+		const json = await response.json()
+
+		setUser(json.data)
 	}
 
 	return (
@@ -30,7 +39,7 @@ const Menu: React.FC<Props> = ({ user }: Props) => {
 								<Navbar.Text className='text-white'>
 									Signed in as {user.displayName}
 								</Navbar.Text>
-								<Nav.Link href='/user-auth/sign-out'>Sign Out</Nav.Link>
+								<Nav.Link onClick={() => logout()}>Sign Out</Nav.Link>
 							</Navbar.Collapse>
 						)}
 					</Nav>
