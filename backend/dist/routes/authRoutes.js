@@ -13,7 +13,7 @@ const isLoggedIn = (req, res, next) => {
 router.get('/google', passport_1.default.authenticate('google', { scope: ['email', 'profile'] }));
 router.get('/logout', (req, res, next) => {
     req.session.destroy(() => {
-        res.send('Goodbye');
+        res.status(200).json({ data: req.user });
     });
 });
 router.get('/google/callback', passport_1.default.authenticate('google', {
