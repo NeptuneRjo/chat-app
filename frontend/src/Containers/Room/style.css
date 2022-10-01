@@ -3,11 +3,12 @@
     height: 70vh;
     margin-bottom: 8px;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.26);
+    overflow: scroll;
+
 }
 
 #room-main {
     flex-grow: 1;
-    
 }
 
 #chat-input {
