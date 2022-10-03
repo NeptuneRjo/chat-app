@@ -62,6 +62,9 @@ app.use(passport_1.default.session());
 /* <-- Routes --> */
 app.use('/auth', routes_1.authRoutes);
 app.use('/chat', routes_1.chatRoutes);
+app.get('/', (req, res) => {
+    res.send('<h1>Hello World</1>');
+});
 /* <-- Server --> */
 mongoose_1.connection.on('connected', () => {
     httpServer.listen(port, () => {
