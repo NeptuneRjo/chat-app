@@ -17,11 +17,9 @@ const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
 		origin: [
+			'https://neptunerjo.github.io',
+			'https://neptunerjo.github.io/',
 			'http://localhost:3000',
-			'https://chat-app-0iem.onrender.com',
-			'https://neptunerjo.github.com/chat-app',
-			'https://neptunerjo.github.com/',
-			'https://neptunerjo.github.com',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
@@ -32,11 +30,9 @@ const io = new Server(httpServer, {
 app.use(
 	cors({
 		origin: [
+			'https://neptunerjo.github.io',
+			'https://neptunerjo.github.io/',
 			'http://localhost:3000',
-			'https://chat-app-0iem.onrender.com',
-			'https://neptunerjo.github.com/chat-app',
-			'https://neptunerjo.github.com/',
-			'https://neptunerjo.github.com',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
