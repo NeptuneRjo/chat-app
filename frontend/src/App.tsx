@@ -9,7 +9,7 @@ import { io, Socket } from 'socket.io-client'
 import './App.css'
 
 function App() {
-	const socket = io('', {
+	const socket = io(`${process.env.REACT_APP_API_URL}`, {
 		transports: ['websocket'],
 	})
 
