@@ -5,7 +5,7 @@ export const getRoom = async (roomId: string): Promise<Response> => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			credentials: 'include',
+			credentials: 'same-origin',
 		}
 	)
 
