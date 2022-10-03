@@ -49,6 +49,7 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 				socket.emit('join', id)
 
 				setMessages(json.data.messages)
+				setOldId(id as string)
 			}
 
 			if (roomError) {
