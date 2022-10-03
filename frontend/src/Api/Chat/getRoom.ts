@@ -1,6 +1,6 @@
 export const getRoom = async (roomId: string): Promise<Response> => {
 	const response: Response = await fetch(
-		`http://localhost:4000/chat/${roomId}`,
+		`${process.env.REACT_APP_API_URL}/chat/${roomId}`,
 		{
 			headers: {
 				'Content-Type': 'application/json',

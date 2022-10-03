@@ -1,10 +1,13 @@
 export const getUser = async (): Promise<Response> => {
-	const response: Response = await fetch('http://localhost:4000/auth/login', {
-		headers: {
-			'Content-type': 'application/json; charset=UTF-8',
-		},
-		credentials: 'include',
-	})
+	const response: Response = await fetch(
+		`${process.env.REACT_APP_API_URL}/auth/login`,
+		{
+			headers: {
+				'Content-type': 'application/json; charset=UTF-8',
+			},
+			credentials: 'include',
+		}
+	)
 
 	return response
 }
