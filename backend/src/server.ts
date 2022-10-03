@@ -18,7 +18,7 @@ const io = new Server(httpServer, {
 	cors: {
 		origin: [
 			'http://localhost:3000',
-			'https://chat-app-one-orpin.vercel.app/',
+			'https://chat-app-0iem.onrender.com',
 			'https://neptunerjo.github.com/chat-app',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
@@ -36,7 +36,7 @@ app.use(
 	cors({
 		origin: [
 			'http://localhost:3000',
-			'https://chat-app-one-orpin.vercel.app/',
+			'https://chat-app-0iem.onrender.com',
 			'https://neptunerjo.github.com/chat-app',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
