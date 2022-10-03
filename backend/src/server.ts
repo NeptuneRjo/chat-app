@@ -66,6 +66,9 @@ app.use(passport.session())
 /* <-- Routes --> */
 app.use('/auth', authRoutes)
 app.use('/chat', chatRoutes)
+app.get('/', (req, res) => {
+	res.send('<h1>Hello World</1>')
+})
 
 /* <-- Server --> */
 
