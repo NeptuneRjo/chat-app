@@ -14,7 +14,13 @@ import './config/passport'
 const app = express()
 const port = process.env.PORT || 4000
 const httpServer = createServer(app)
-const io = new Server(httpServer, {})
+const io = new Server(httpServer, {
+	cors: {
+		origin: 'http://localhost:3000',
+		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+		credentials: true,
+	},
+})
 
 /* <-- Middleware --> */
 app.use(
@@ -44,6 +50,7 @@ app.use('/auth', authRoutes)
 app.use('/chat', chatRoutes)
 
 /* <-- Server --> */
+
 connection.on('connected', () => {
 	httpServer.listen(port, () => {
 		console.log('Connect to DB and listening on port:', port)
@@ -52,7 +59,17 @@ connection.on('connected', () => {
 
 /* Web Sockets */
 io.on('connection', (socket) => {
-	console.log('Made socket connection', socket.id)
+	socket.on('join', (room) => {
+		socket.join(room)
+	})
+
+	socket.on('leave', (room) => {
+		socket.leave(room)
+	})
+
+	socket.on('chat', (data) => {
+		io.to(data.id).emit('chat', data.messages)
+	})
 })
 
 io.engine.on('connection_error', (err: any | unknown) => {
