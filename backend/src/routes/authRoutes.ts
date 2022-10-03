@@ -1,12 +1,9 @@
 import { Router } from 'express'
 import passport from 'passport'
 import { Request, Response, NextFunction } from 'express'
+import 'dotenv/config'
 
 const router = Router()
-
-const isLoggedIn = (req: Request, res: Response, next: NextFunction) => {
-	req.user ? next() : res.sendStatus(401)
-}
 
 // Login and/or Signup
 router.get(
@@ -23,7 +20,7 @@ router.get('/logout', (req, res, next) => {
 router.get(
 	'/google/callback',
 	passport.authenticate('google', {
-		successRedirect: 'http://localhost:3000/',
+		successRedirect: `${process.env.REDIRECT_URL}`,
 		failureRedirect: '/auth/failure',
 	})
 )

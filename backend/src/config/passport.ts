@@ -5,13 +5,14 @@ import 'dotenv/config'
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+const GOOGLE_CALLBACK_URL = process.env.CALLBACK_URL
 
 passport.use(
 	new GoogleStrategy(
 		{
 			clientID: GOOGLE_CLIENT_ID as string,
 			clientSecret: GOOGLE_CLIENT_SECRET as string,
-			callbackURL: 'https://chat-app-0iem.onrender.com/auth/google/callback',
+			callbackURL: `${GOOGLE_CALLBACK_URL}/auth/google/callback`,
 			passReqToCallback: true,
 		},
 		function (
