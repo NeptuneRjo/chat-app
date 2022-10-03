@@ -91,7 +91,7 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 			<h3 className='p-2'>Chat Room {title}</h3>
 			<Row id='chat-container' className='bg-light pt-3'>
 				{messages.map((message, key) => (
-					<Row key={key}>
+					<Row key={key} id='chat-item' className='h-25'>
 						<Col id='chat-incoming'>
 							{message.handle !== user?.displayName && (
 								<Message message={message} user={false} />
