@@ -5,10 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
+require("dotenv/config");
 const router = (0, express_1.Router)();
-const isLoggedIn = (req, res, next) => {
-    req.user ? next() : res.sendStatus(401);
-};
 // Login and/or Signup
 router.get('/google', passport_1.default.authenticate('google', { scope: ['email', 'profile'] }));
 router.get('/logout', (req, res, next) => {
@@ -17,7 +15,7 @@ router.get('/logout', (req, res, next) => {
     });
 });
 router.get('/google/callback', passport_1.default.authenticate('google', {
-    successRedirect: 'http://localhost:3000/',
+    successRedirect: `${process.env.REDIRECT_URL}`,
     failureRedirect: '/auth/failure',
 }));
 router.get('/login', (req, res) => {
