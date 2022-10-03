@@ -17,7 +17,13 @@ require("./config/passport");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 const httpServer = (0, http_1.createServer)(app);
-const io = new socket_io_1.Server(httpServer, {});
+const io = new socket_io_1.Server(httpServer, {
+    cors: {
+        origin: 'http://localhost:3000',
+        methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+        credentials: true,
+    },
+});
 /* <-- Middleware --> */
 app.use((0, cors_1.default)({
     origin: 'http://localhost:3000',
@@ -46,7 +52,15 @@ mongoose_1.connection.on('connected', () => {
 });
 /* Web Sockets */
 io.on('connection', (socket) => {
-    console.log('Made socket connection', socket.id);
+    socket.on('join', (room) => {
+        socket.join(room);
+    });
+    socket.on('leave', (room) => {
+        socket.leave(room);
+    });
+    socket.on('chat', (data) => {
+        io.to(data.id).emit('chat', data.messages);
+    });
 });
 io.engine.on('connection_error', (err) => {
     const { req, code, message, context } = err;
