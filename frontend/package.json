@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:4000",
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
@@ -18,6 +19,7 @@
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
+    "socket.io-client": "^4.5.2",
     "typescript": "^4.8.3",
     "web-vitals": "^2.1.4"
   },
