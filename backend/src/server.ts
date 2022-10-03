@@ -16,18 +16,36 @@ const port = process.env.PORT || 4000
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
-		origin: 'http://localhost:3000',
+		origin: [
+			'http://localhost:3000',
+			'https://chat-app-one-orpin.vercel.app/',
+			'https://neptunerjo.github.com/chat-app',
+		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
+		allowedHeaders: [
+			'Content-Type',
+			'Authorization',
+			'Access-Control-Allow-Credentials',
+		],
 	},
 })
 
 /* <-- Middleware --> */
 app.use(
 	cors({
-		origin: 'http://localhost:3000',
+		origin: [
+			'http://localhost:3000',
+			'https://chat-app-one-orpin.vercel.app/',
+			'https://neptunerjo.github.com/chat-app',
+		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
+		allowedHeaders: [
+			'Content-Type',
+			'Authorization',
+			'Access-Control-Allow-Credentials',
+		],
 	})
 )
 
