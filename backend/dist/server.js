@@ -26,11 +26,6 @@ const io = new socket_io_1.Server(httpServer, {
         ],
         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
         credentials: true,
-        allowedHeaders: [
-            'Content-Type',
-            'Authorization',
-            'Access-Control-Allow-Credentials',
-        ],
     },
 });
 /* <-- Middleware --> */
@@ -42,11 +37,6 @@ app.use((0, cors_1.default)({
     ],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
-    allowedHeaders: [
-        'Content-Type',
-        'Authorization',
-        'Access-Control-Allow-Credentials',
-    ],
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));

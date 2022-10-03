@@ -23,11 +23,6 @@ const io = new Server(httpServer, {
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
-		allowedHeaders: [
-			'Content-Type',
-			'Authorization',
-			'Access-Control-Allow-Credentials',
-		],
 	},
 })
 
@@ -41,11 +36,6 @@ app.use(
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
-		allowedHeaders: [
-			'Content-Type',
-			'Authorization',
-			'Access-Control-Allow-Credentials',
-		],
 	})
 )
 
