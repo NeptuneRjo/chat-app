@@ -23,8 +23,10 @@ function App() {
 
 			if (!response.ok) {
 				setError(json.error)
+				console.log('error', json.error)
 			} else {
 				setUser(json.data)
+				console.log(json.data)
 			}
 		})()
 	}, [])
