@@ -10,7 +10,7 @@ type Props = {
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const login = async () => {
-		window.open('http://localhost:4000/auth/google', '_self')
+		window.open(`'${process.env.REACT_APP_API_URL}/auth/google'`, '_self')
 	}
 
 	const logout = async () => {
