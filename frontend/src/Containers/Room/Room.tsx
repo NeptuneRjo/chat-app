@@ -5,13 +5,14 @@ import { MessageInterface, UserInterface } from '../../types'
 import { useNavigate, useParams } from 'react-router-dom'
 import './style.css'
 import { getRoom, newMessage } from '../../Api'
-import { io } from 'socket.io-client'
+import { Socket } from 'socket.io-client'
 
 type Props = {
 	user: UserInterface | undefined
+	socket: any
 }
 
-const Room: React.FC<Props> = ({ user }: Props) => {
+const Room: React.FC<Props> = ({ user, socket }: Props) => {
 	const { id } = useParams()
 
 	const titleProperties = id?.split('-')
@@ -20,10 +21,6 @@ const Room: React.FC<Props> = ({ user }: Props) => {
 	if (titleProperties) {
 		title = titleProperties[1]
 	}
-
-	const socket = io('', {
-		transports: ['websocket'],
-	})
 
 	const navigate = useNavigate()
 
@@ -85,7 +82,7 @@ const Room: React.FC<Props> = ({ user }: Props) => {
 		}
 	}
 
-	socket.on('chat', async (data) => {
+	socket.on('chat', async (data: any) => {
 		setMessages(data)
 	})
 
