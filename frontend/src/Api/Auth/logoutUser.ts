@@ -5,7 +5,7 @@ export const logoutUser = async (): Promise<Response> => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			credentials: 'same-origin',
+			credentials: 'include',
 		}
 	)
 
