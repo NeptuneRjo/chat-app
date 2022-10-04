@@ -29,15 +29,17 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 /* <-- Middleware --> */
-app.use((0, cors_1.default)({
-    origin: [
-        'https://neptunerjo.github.io',
-        'https://neptunerjo.github.io/',
-        'http://localhost:3000',
-    ],
-    methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
-    credentials: true,
-}));
+app.use(
+// cors({
+// 	origin: [
+// 		'https://neptunerjo.github.io',
+// 		'https://neptunerjo.github.io/',
+// 		'http://localhost:3000',
+// 	],
+// 	methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+// 	credentials: true,
+// })
+(0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, express_session_1.default)({
