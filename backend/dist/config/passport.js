@@ -13,7 +13,7 @@ const GOOGLE_CALLBACK_URL = process.env.CALLBACK_URL;
 passport_1.default.use(new passport_google_oauth2_1.Strategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: 'https://chat-app-0iem.onrender.com/auth/google/callback',
+    callbackURL: GOOGLE_CALLBACK_URL,
     passReqToCallback: true,
 }, function (request, accessToken, refreshToken, profile, done) {
     models_1.User.findOneAndUpdate({ googleId: profile.id }, {
