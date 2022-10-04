@@ -8,7 +8,10 @@ const router = Router()
 // Login and/or Signup
 router.get(
 	'/google',
-	passport.authenticate('google', { scope: ['email', 'profile'] })
+	passport.authenticate('google', { scope: ['email', 'profile'] }),
+	(req, res) => {
+		console.log(req.user)
+	}
 )
 
 router.get('/logout', (req, res, next) => {
