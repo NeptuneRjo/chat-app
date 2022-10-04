@@ -47,6 +47,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		rolling: true,
+		cookie: { sameSite: 'none' },
 	})
 )
 app.use(passport.initialize())
