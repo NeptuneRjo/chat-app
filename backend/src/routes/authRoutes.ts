@@ -22,7 +22,7 @@ router.get('/logout', (req, res, next) => {
 router.get(
 	'/google/callback',
 	passport.authenticate('google', {
-		successRedirect: process.env.REDIRECT_URL as string,
+		successRedirect: process.env.REDIRECT_URL,
 		failureRedirect: '/auth/failure',
 	})
 )
