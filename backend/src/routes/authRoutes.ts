@@ -24,7 +24,16 @@ router.get(
 	passport.authenticate('google', {
 		successRedirect: process.env.REDIRECT_URL,
 		failureRedirect: '/auth/failure',
-	})
+	}),
+	(req, res, next) => {
+		req.session.save((err) => {
+			if (err) {
+				return next(err)
+			}
+
+			res.status(200)
+		})
+	}
 )
 
 router.get('/login', (req, res) => {
