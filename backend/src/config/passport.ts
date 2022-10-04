@@ -12,7 +12,7 @@ passport.use(
 		{
 			clientID: GOOGLE_CLIENT_ID as string,
 			clientSecret: GOOGLE_CLIENT_SECRET as string,
-			callbackURL: `${GOOGLE_CALLBACK_URL}/auth/google/callback`,
+			callbackURL: 'https://chat-app-0iem.onrender.com/auth/google/callback',
 			passReqToCallback: true,
 		},
 		function (
