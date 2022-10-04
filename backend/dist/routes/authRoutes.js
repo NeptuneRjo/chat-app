@@ -15,7 +15,7 @@ router.get('/logout', (req, res, next) => {
     });
 });
 router.get('/google/callback', passport_1.default.authenticate('google', {
-    successRedirect: `${process.env.REDIRECT_URL}/`,
+    successRedirect: process.env.REDIRECT_URL,
     failureRedirect: '/auth/failure',
 }));
 router.get('/login', (req, res) => {
