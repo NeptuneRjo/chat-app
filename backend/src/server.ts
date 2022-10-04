@@ -44,12 +44,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
 	session({
 		secret: process.env.EXPRESS_SESSION_SECRET as string,
-		resave: true,
+		resave: false,
 		saveUninitialized: false,
 		rolling: true,
 		cookie: {
 			sameSite: 'none',
 			secure: false,
+			httpOnly: false,
 		},
 	})
 )

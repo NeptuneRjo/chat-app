@@ -42,12 +42,13 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, express_session_1.default)({
     secret: process.env.EXPRESS_SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: false,
     rolling: true,
     cookie: {
         sameSite: 'none',
         secure: false,
+        httpOnly: false,
     },
 }));
 app.use(passport_1.default.initialize());
