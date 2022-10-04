@@ -30,6 +30,7 @@ passport_1.default.use(new passport_google_oauth2_1.Strategy({
 passport_1.default.serializeUser((user, done) => {
     done(null, user);
 });
-passport_1.default.deserializeUser((user, done) => {
+passport_1.default.deserializeUser(async (id, done) => {
+    const user = await models_1.User.findById(id);
     done(null, user);
 });
