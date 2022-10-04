@@ -18,14 +18,14 @@ router.get('/logout', (req, res, next) => {
     });
 });
 router.get('/google/callback', passport_1.default.authenticate('google', {
-    successRedirect: process.env.REDIRECT_URL,
+    // successRedirect: process.env.REDIRECT_URL,
     failureRedirect: '/auth/failure',
 }), (req, res, next) => {
     req.session.save((err) => {
         if (err) {
             return next(err);
         }
-        res.status(200);
+        res.status(200).redirect(`${process.env.REDIRECT_URL}`);
     });
 });
 router.get('/login', (req, res) => {
