@@ -28,15 +28,16 @@ const io = new Server(httpServer, {
 
 /* <-- Middleware --> */
 app.use(
-	cors({
-		origin: [
-			'https://neptunerjo.github.io',
-			'https://neptunerjo.github.io/',
-			'http://localhost:3000',
-		],
-		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
-		credentials: true,
-	})
+	// cors({
+	// 	origin: [
+	// 		'https://neptunerjo.github.io',
+	// 		'https://neptunerjo.github.io/',
+	// 		'http://localhost:3000',
+	// 	],
+	// 	methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+	// 	credentials: true,
+	// })
+	cors()
 )
 
 app.use(express.json())
