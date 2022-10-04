@@ -23,7 +23,6 @@ passport_1.default.use(new passport_google_oauth2_1.Strategy({
             displayName: profile.displayName,
         },
     }, { upsert: true }, (err, user) => {
-        console.log(user);
         return done(err, user);
     });
 }));

@@ -1,6 +1,5 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { Request, Response, NextFunction } from 'express'
 import 'dotenv/config'
 
 const router = Router()
@@ -8,14 +7,14 @@ const router = Router()
 // Login and/or Signup
 router.get(
 	'/google',
-	passport.authenticate('google', { scope: ['email', 'profile'] }),
-	(req, res) => {
-		console.log(req.user)
-	}
+	passport.authenticate('google', { scope: ['email', 'profile'] })
 )
 
 router.get('/logout', (req, res, next) => {
-	req.session.destroy(() => {
+	req.session.destroy((err) => {
+		if (err) {
+			res.status(400).json({ err: err })
+		}
 		res.status(200).json({ data: req.user })
 	})
 })

@@ -33,7 +33,6 @@ passport.use(
 				},
 				{ upsert: true },
 				(err: any, user: any) => {
-					console.log(user)
 					return done(err, user)
 				}
 			)
