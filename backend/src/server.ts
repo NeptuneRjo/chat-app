@@ -28,16 +28,15 @@ const io = new Server(httpServer, {
 
 /* <-- Middleware --> */
 app.use(
-	// cors({
-	// 	origin: [
-	// 		'https://neptunerjo.github.io',
-	// 		'https://neptunerjo.github.io/',
-	// 		'http://localhost:3000',
-	// 	],
-	// 	methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
-	// 	credentials: true,
-	// })
-	cors()
+	cors({
+		origin: [
+			'https://neptunerjo.github.io',
+			'https://neptunerjo.github.io/',
+			'http://localhost:3000',
+		],
+		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
+		credentials: true,
+	})
 )
 
 app.use(express.json())
@@ -48,7 +47,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		rolling: true,
-		cookie: { secure: false },
+		cookie: { sameSite: 'none' },
 	})
 )
 app.use(passport.initialize())
