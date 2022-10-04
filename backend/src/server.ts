@@ -44,7 +44,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(
 	session({
 		secret: process.env.EXPRESS_SESSION_SECRET as string,
-		resave: false,
+		resave: true,
 		saveUninitialized: false,
 		rolling: true,
 		cookie: {
