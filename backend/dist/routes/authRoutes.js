@@ -8,7 +8,9 @@ const passport_1 = __importDefault(require("passport"));
 require("dotenv/config");
 const router = (0, express_1.Router)();
 // Login and/or Signup
-router.get('/google', passport_1.default.authenticate('google', { scope: ['email', 'profile'] }));
+router.get('/google', passport_1.default.authenticate('google', { scope: ['email', 'profile'] }), (req, res) => {
+    console.log(req.user);
+});
 router.get('/logout', (req, res, next) => {
     req.session.destroy(() => {
         res.status(200).json({ data: req.user });
