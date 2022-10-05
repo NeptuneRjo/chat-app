@@ -47,8 +47,6 @@ app.use((0, express_session_1.default)({
     rolling: true,
     cookie: {
         sameSite: 'none',
-        secure: false,
-        httpOnly: false,
     },
 }));
 app.use(passport_1.default.initialize());

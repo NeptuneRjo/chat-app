@@ -49,8 +49,6 @@ app.use(
 		rolling: true,
 		cookie: {
 			sameSite: 'none',
-			secure: false,
-			httpOnly: false,
 		},
 	})
 )
