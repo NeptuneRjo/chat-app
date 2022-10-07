@@ -5,6 +5,7 @@ import 'bootswatch/dist/lux/bootstrap.min.css'
 import { getUser } from './Api'
 import { UserInterface } from './types'
 import { io, Socket } from 'socket.io-client'
+import Cookies from 'js-cookie'
 
 import './App.css'
 
@@ -18,12 +19,19 @@ function App() {
 
 	useEffect(() => {
 		;(async () => {
-			const response = await getUser()
-			const json = await response.json()
+			const cookiesJwt = Cookies.get('x-auth-cookie')
 
-			if (!response.ok) {
-			} else {
-				setUser(json.data)
+			if (cookiesJwt) {
+				Cookies.remove('x-auth-cookie')
+
+				const response = await getUser(cookiesJwt)
+				const json = await response.json()
+
+				if (!response.ok) {
+					setError(json.error)
+				} else {
+					setUser(json.data)
+				}
 			}
 		})()
 	}, [])

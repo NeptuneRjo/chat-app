@@ -1,6 +1,5 @@
-import express, { urlencoded } from 'express'
+import express from 'express'
 import cors from 'cors'
-import session from 'express-session'
 import passport from 'passport'
 import { Server } from 'socket.io'
 import { connection } from 'mongoose'
@@ -20,6 +19,7 @@ const io = new Server(httpServer, {
 			'https://neptunerjo.github.io',
 			'https://neptunerjo.github.io/',
 			'http://localhost:3000',
+			'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
@@ -27,12 +27,15 @@ const io = new Server(httpServer, {
 })
 
 /* <-- Middleware --> */
+app.set('trust proxy', 1)
+
 app.use(
 	cors({
 		origin: [
 			'https://neptunerjo.github.io',
 			'https://neptunerjo.github.io/',
 			'http://localhost:3000',
+			'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
@@ -41,29 +44,13 @@ app.use(
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(
-	session({
-		secret: process.env.EXPRESS_SESSION_SECRET as string,
-		resave: false,
-		saveUninitialized: false,
-		rolling: true,
-		cookie: {
-			sameSite: 'none',
-		},
-	})
-)
 app.use(passport.initialize())
-app.use(passport.session())
 
 /* <-- Routes --> */
 app.use('/auth', authRoutes)
 app.use('/chat', chatRoutes)
-app.get('/', (req, res) => {
-	res.send('<h1>Hello World</1>')
-})
 
 /* <-- Server --> */
-
 connection.on('connected', () => {
 	httpServer.listen(port, () => {
 		console.log('Connect to DB and listening on port:', port)

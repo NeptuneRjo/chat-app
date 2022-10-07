@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const express_session_1 = __importDefault(require("express-session"));
 const passport_1 = __importDefault(require("passport"));
 const socket_io_1 = require("socket.io");
 const mongoose_1 = require("mongoose");
@@ -23,40 +22,30 @@ const io = new socket_io_1.Server(httpServer, {
             'https://neptunerjo.github.io',
             'https://neptunerjo.github.io/',
             'http://localhost:3000',
+            'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
         ],
         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
         credentials: true,
     },
 });
 /* <-- Middleware --> */
+app.set('trust proxy', 1);
 app.use((0, cors_1.default)({
     origin: [
         'https://neptunerjo.github.io',
         'https://neptunerjo.github.io/',
         'http://localhost:3000',
+        'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
     ],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use((0, express_session_1.default)({
-    secret: process.env.EXPRESS_SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    rolling: true,
-    cookie: {
-        sameSite: 'none',
-    },
-}));
 app.use(passport_1.default.initialize());
-app.use(passport_1.default.session());
 /* <-- Routes --> */
 app.use('/auth', routes_1.authRoutes);
 app.use('/chat', routes_1.chatRoutes);
-app.get('/', (req, res) => {
-    res.send('<h1>Hello World</1>');
-});
 /* <-- Server --> */
 mongoose_1.connection.on('connected', () => {
     httpServer.listen(port, () => {

@@ -17,7 +17,11 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 		const response = await logoutUser()
 		const json = await response.json()
 
-		setUser(json.data)
+		if (!response.ok) {
+			console.log(json.err)
+		} else {
+			setUser(undefined)
+		}
 	}
 
 	return (
@@ -33,7 +37,9 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 							<NavDropdown.Item href='#/chat/room-3'>Room 3</NavDropdown.Item>
 						</NavDropdown>
 						{user === undefined ? (
-							<Nav.Link onClick={() => login()}>Sign in</Nav.Link>
+							<Nav.Link href={`${process.env.REACT_APP_API_URL}/auth/google`}>
+								Sign in
+							</Nav.Link>
 						) : (
 							<Navbar.Collapse className='justify-content-end'>
 								<Navbar.Text className='text-white'>

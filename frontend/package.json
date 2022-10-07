@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:4000",
   "name": "frontend",
   "version": "0.1.0",
   "homepage": "https://neptunerjo.github.io/chat-app",
@@ -13,6 +14,7 @@
     "@types/react-dom": "^18.0.6",
     "bootstrap": "^5.2.1",
     "bootswatch": "^5.2.1",
+    "js-cookie": "^3.0.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
@@ -50,6 +52,7 @@
     ]
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.2",
     "gh-pages": "^4.0.0"
   }
 }

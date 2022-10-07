@@ -1,7 +1,11 @@
 import passport from 'passport'
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2'
 import { User } from '../models'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth2'
+
 import 'dotenv/config'
+
+/* GOOGLE STRATEGY */
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string
@@ -40,11 +44,31 @@ passport.use(
 	)
 )
 
-passport.serializeUser((user, done) => {
-	done(null, user)
-})
+/* JWT Strategy */
 
-passport.deserializeUser(async (id, done) => {
-	const user = await User.findById(id)
-	done(null, user)
-})
+const JWT_SECRET_PROD = process.env.JWT_SECRET_PROD
+const JWT_SECRET_DEV = process.env.JWT_SECRET_DEV
+const secretOrKey =
+	process.env.NODE_ENV === 'production' ? JWT_SECRET_PROD : JWT_SECRET_DEV
+
+passport.use(
+	new JwtStrategy(
+		{
+			jwtFromRequest: ExtractJwt.fromHeader('x-auth-token'),
+			secretOrKey: secretOrKey,
+		},
+		async (payload, done) => {
+			try {
+				const user = await User.findById(payload.id)
+
+				if (user) {
+					done(null, user)
+				} else {
+					done(null, false)
+				}
+			} catch (error) {
+				done(error, false)
+			}
+		}
+	)
+)
