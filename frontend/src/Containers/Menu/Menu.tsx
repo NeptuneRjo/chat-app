@@ -27,7 +27,7 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	return (
 		<Navbar expand='lg' bg='primary' variant='dark'>
 			<Container>
-				<Navbar.Brand href='#/chat/room-1'>Chat App</Navbar.Brand>
+				<Navbar.Brand href='#/chat/room-1'>Harmony</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>

@@ -1,6 +1,6 @@
-## Chat App (Fullstack)
+## Harmony (Fullstack)
 
-Chat app is a fullstack application that allows users to send and view messages in the real time.
+Harmony is a fullstack application that allows users to send and view messages in the real time.
 
 ## Project status
 
@@ -43,7 +43,7 @@ To start the React page
 This was a project built with the goal of using technologies learned up to this point and to familiarize myself
 with new technologies like Websockets.
 
-I wanted to build a real-time React chat application that allows users to sign in using their google accounts and chat in a few different rooms.
+I wanted to build a real-time React Harmonylication that allows users to sign in using their google accounts and chat in a few different rooms.
 The project was designed with scaling in mind, and new rooms can be created and used in the application easily.
 
 One of the main challenges I ran into was implementing `Socket.io`. I spent some time going through various resources to find the optimal way to
