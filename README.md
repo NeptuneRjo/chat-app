@@ -14,7 +14,7 @@ hosting on the same domain, there is no page to visit for this project.
 
 Please view this demonstration of the app being used on localhost through two different google accounts.
 
-![Chat app demo](https://studio.youtube.com/video/5FtekUkGkUc/edit)
+![Chat app demo](https://www.youtube.com/watch?v=5FtekUkGkUc)
 
 ## Installation and Setup
 
