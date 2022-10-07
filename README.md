@@ -53,7 +53,7 @@ took a bit of tinkering and a few trials with different methods but ultimately a
 At the end of the day the technologies implemented in this project are:
 
 Frontend: React, Bootstrap, Typescript, and React-Router v6.
-Backend: Node, MongoDb, Express, Passport-Google-Oauth2, Socket.io, Typescipt and Express-session.
+Backend: Node, MongoDb, Express, Passport-Google-Oauth2, Socket.io, Typescipt and PassportJWT.
 
 I used `create-react-app --template typescript` boilerplate to minimize setup time so I could spend more time focusing on building the backend.
 Bootstrap with a Bootswatch theme was used for simplicity.
