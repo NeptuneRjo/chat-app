@@ -15,12 +15,7 @@ const port = process.env.PORT || 4000
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
-		origin: [
-			'https://neptunerjo.github.io',
-			'https://neptunerjo.github.io/',
-			'http://localhost:3000',
-			'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
-		],
+		origin: ['http://localhost:3000'],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 	},
@@ -31,12 +26,7 @@ app.set('trust proxy', 1)
 
 app.use(
 	cors({
-		origin: [
-			'https://neptunerjo.github.io',
-			'https://neptunerjo.github.io/',
-			'http://localhost:3000',
-			'http://chatapp-env.eba-qxaypqjg.us-east-1.elasticbeanstalk.com',
-		],
+		origin: ['http://localhost:3000'],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 	})
