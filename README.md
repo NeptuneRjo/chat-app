@@ -7,6 +7,15 @@ Chat app is a fullstack application that allows users to send and view messages 
 This project is currently under development.
 The main project is completed\*, test suites are under way.
 
+## Demonstration
+
+Due to the nature of `PassportJs'` Google-Oauth2 Strategy, and because I do not have access to a hosting service that allows both Express and React
+hosting on the same domain, there is no page to visit for this project.
+
+Please view this demonstration of the app being used on localhost through two different google accounts.
+
+[![Chat app demo](NeptuneRjo/chat-app-frontend)]
+
 ## Installation and Setup
 
 Clone or download this repository. You will need `node` and `npm` installed globally on your machine.
