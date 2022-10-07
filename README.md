@@ -14,7 +14,7 @@ hosting on the same domain, there is no page to visit for this project.
 
 Please view this demonstration of the app being used on localhost through two different google accounts.
 
-https://www.youtube.com/watch?v=5FtekUkGkUc
+<video src='https://www.youtube.com/watch?v=5FtekUkGkUc' width=180/>
 
 ## Installation and Setup
 
