@@ -17,3 +17,15 @@ export const fakeRoomFail = {
 	messages: [1],
 	roomId: 1,
 }
+
+export const fakeUser = {
+	googleId: '123',
+	displayName: 'Neptune',
+	picture: '456',
+}
+
+export const fakeUserFail = {
+	googleId: 123,
+	displayName: 'Neptune',
+	picture: 456,
+}
