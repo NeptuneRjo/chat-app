@@ -1,9 +1,9 @@
 import { Schema, model } from 'mongoose'
 
 const userModel = new Schema({
-	googleId: { type: String },
-	picture: { type: String },
-	displayName: { type: String },
+	googleId: { type: String, required: true },
+	picture: { type: String, required: true },
+	displayName: { type: String, required: true },
 })
 
 const User = model('User', userModel)
