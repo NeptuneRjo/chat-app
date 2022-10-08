@@ -1,14 +1,14 @@
 import express from 'express'
-import cors from 'cors'
+import { connect, connection } from 'mongoose'
 import passport from 'passport'
+import cors from 'cors'
+import { initializeMongoServer } from './config/mongoConfigTest'
+import { authRoutes, chatRoutes } from '../routes'
 import { Server } from 'socket.io'
-import { connection } from 'mongoose'
 import { createServer } from 'http'
-import { authRoutes, chatRoutes } from './routes'
 
-import './config/mongoConfig'
 import 'dotenv/config'
-import './config/passport'
+import '../config/passport'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -41,6 +41,10 @@ app.use('/auth', authRoutes)
 app.use('/chat', chatRoutes)
 
 /* <-- Server --> */
+
+// Initializes Mongodb-Memory-Store
+initializeMongoServer()
+
 connection.on('connected', () => {
 	httpServer.listen(port, () => {
 		console.log('Connect to DB and listening on port:', port)

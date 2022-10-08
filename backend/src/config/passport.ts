@@ -1,17 +1,22 @@
 import passport from 'passport'
-import { Strategy as GoogleStrategy } from 'passport-google-oauth2'
 import { User } from '../models'
+import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt'
+import { Strategy as GoogleStrategy } from 'passport-google-oauth2'
+
 import 'dotenv/config'
 
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
+/* GOOGLE STRATEGY */
+
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID as string
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET as string
+const GOOGLE_CALLBACK_URL = process.env.CALLBACK_URL as string
 
 passport.use(
 	new GoogleStrategy(
 		{
-			clientID: GOOGLE_CLIENT_ID as string,
-			clientSecret: GOOGLE_CLIENT_SECRET as string,
-			callbackURL: 'http://localhost:4000/auth/google/callback',
+			clientID: GOOGLE_CLIENT_ID,
+			clientSecret: GOOGLE_CLIENT_SECRET,
+			callbackURL: GOOGLE_CALLBACK_URL,
 			passReqToCallback: true,
 		},
 		function (
@@ -32,7 +37,6 @@ passport.use(
 				},
 				{ upsert: true },
 				(err: any, user: any) => {
-					console.log(user)
 					return done(err, user)
 				}
 			)
@@ -40,10 +44,31 @@ passport.use(
 	)
 )
 
-passport.serializeUser((user, done) => {
-	done(null, user)
-})
+/* JWT Strategy */
 
-passport.deserializeUser((user, done) => {
-	done(null, user as Express.User)
-})
+const JWT_SECRET_PROD = process.env.JWT_SECRET_PROD
+const JWT_SECRET_DEV = process.env.JWT_SECRET_DEV
+const secretOrKey =
+	process.env.NODE_ENV === 'production' ? JWT_SECRET_PROD : JWT_SECRET_DEV
+
+passport.use(
+	new JwtStrategy(
+		{
+			jwtFromRequest: ExtractJwt.fromHeader('x-auth-token'),
+			secretOrKey: secretOrKey,
+		},
+		async (payload, done) => {
+			try {
+				const user = await User.findById(payload.id)
+
+				if (user) {
+					done(null, user)
+				} else {
+					done(null, false)
+				}
+			} catch (error) {
+				done(error, false)
+			}
+		}
+	)
+)

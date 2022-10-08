@@ -10,20 +10,24 @@ type Props = {
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const login = async () => {
-		window.open('http://localhost:4000/auth/google', '_self')
+		window.open(`${process.env.REACT_APP_API_URL}/auth/google`, '_self')
 	}
 
 	const logout = async () => {
 		const response = await logoutUser()
 		const json = await response.json()
 
-		setUser(json.data)
+		if (!response.ok) {
+			console.log(json.err)
+		} else {
+			setUser(undefined)
+		}
 	}
 
 	return (
 		<Navbar expand='lg' bg='primary' variant='dark'>
 			<Container>
-				<Navbar.Brand href='/chat-room'>Chat App</Navbar.Brand>
+				<Navbar.Brand href='#/chat/room-1'>Harmony</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
@@ -33,7 +37,9 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 							<NavDropdown.Item href='#/chat/room-3'>Room 3</NavDropdown.Item>
 						</NavDropdown>
 						{user === undefined ? (
-							<Nav.Link onClick={() => login()}>Sign in</Nav.Link>
+							<Nav.Link href={`${process.env.REACT_APP_API_URL}/auth/google`}>
+								Sign in
+							</Nav.Link>
 						) : (
 							<Navbar.Collapse className='justify-content-end'>
 								<Navbar.Text className='text-white'>
