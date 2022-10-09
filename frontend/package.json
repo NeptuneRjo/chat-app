@@ -28,10 +28,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build",
-    "predeploy": "npm run build"
+    "predeploy": "npm run build",
+    "cypress:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,8 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",
-    "gh-pages": "^4.0.0"
+    "cypress": "^10.9.0",
+    "gh-pages": "^4.0.0",
+    "jest": "^27.5.1"
   }
 }
