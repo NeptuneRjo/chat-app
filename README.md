@@ -38,6 +38,23 @@ To start the React page
 - run `npm start`
 - visit the page at `http://localhost:3000`
 
+## Testing
+
+Frontend:
+
+The frontend is tested with Cypress.
+
+- run `npm start` to start a local instance of the React page on `localhost:3000`
+- `npm run cypress:open` to open the cypress terminal
+- select the `main.cy.ts` file
+
+Backend:
+
+The backend is tested with Jest and Supertest
+
+- run `node dist/__tests__/server.js` (or use nodemon) to start an instance of the test server on `localhost:4000`
+- run `npm test` or `jest dist/*filepath*`
+
 ## Reflection
 
 This was a project built with the goal of using technologies learned up to this point and to familiarize myself
