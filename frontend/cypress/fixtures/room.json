@@ -1,0 +1,14 @@
+{
+	"data": {
+		"_id": "6338abc9410615f2ea203b2a",
+		"roomId": "room-1",
+		"__v": "0",
+		"messages": [
+			{
+				"handle": "Neptune",
+				"message": "Hello World!",
+				"date": "1665113975249"
+			}
+		]
+	}
+}
