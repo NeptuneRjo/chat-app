@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Menu, Room } from './Containers'
 import 'bootswatch/dist/lux/bootstrap.min.css'
-import { getUser } from './Api'
 import { UserInterface } from './types'
-import { io, Socket } from 'socket.io-client'
+import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
+import { getAndSetUser } from './global/utils'
 
 import './App.css'
 
@@ -14,24 +14,19 @@ function App() {
 		transports: ['websocket'],
 	})
 
-	const [error, setError] = useState<unknown | null>(null)
+	const [appError, setAppError] = useState<unknown | null>(null)
 	const [user, setUser] = useState<undefined | UserInterface>(undefined)
 
 	useEffect(() => {
 		;(async () => {
-			const cookiesJwt = Cookies.get('x-auth-cookie')
+			const token = Cookies.get('x-auth-cookie')
 
-			if (cookiesJwt) {
-				Cookies.remove('x-auth-cookie')
+			if (token) {
+				const userResponse = await getAndSetUser(token)
 
-				const response = await getUser(cookiesJwt)
-				const json = await response.json()
-
-				if (!response.ok) {
-					setError(json.error)
-				} else {
-					setUser(json.data)
-				}
+				userResponse.data
+					? setUser(userResponse.data)
+					: setUser(userResponse.error)
 			}
 		})()
 	}, [])
