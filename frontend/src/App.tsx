@@ -24,7 +24,7 @@ function App() {
 			if (token) {
 				const userResponse = await getAndSetUser(token)
 
-				userResponse.data
+				userResponse.data !== undefined
 					? setUser(userResponse.data)
 					: setAppError(userResponse.error)
 			}
