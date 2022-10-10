@@ -5,7 +5,7 @@ import 'bootswatch/dist/lux/bootstrap.min.css'
 import { UserInterface } from './types'
 import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
-import { getAndSetUser } from './global/utils'
+import { getAndSetUser } from './Global/utils'
 
 import './App.css'
 
