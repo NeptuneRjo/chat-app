@@ -26,7 +26,7 @@ function App() {
 
 				userResponse.data
 					? setUser(userResponse.data)
-					: setUser(userResponse.error)
+					: setAppError(userResponse.error)
 			}
 		})()
 	}, [])
