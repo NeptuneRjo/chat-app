@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
-import { getAndSetUser } from '../Global/utils'
+import { getAndSetUser } from './Global/utils'
 
 const MOCK_DATA = {
 	data: {
