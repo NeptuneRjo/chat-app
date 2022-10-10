@@ -12,28 +12,45 @@ const MOCK_DATA = {
 	},
 }
 
+const MOCK_ERROR = {
+	error: 'User not found',
+}
+
 const unmockedFetch = global.fetch
 
 describe('App', () => {
-	beforeAll(() => {
-		global.fetch = jest.fn(() =>
-			Promise.resolve({
-				json: () => Promise.resolve(MOCK_DATA),
-			})
-		) as jest.Mock
-	})
-
 	afterAll(() => {
 		global.fetch = unmockedFetch
 	})
-})
 
-describe('When the app fetches for the user', () => {
-	test('returns a user when a user is provided', async () => {
-		// const data = await getAndSetUser('1')
-		const data = MOCK_DATA
-		const t = await getAndSetUser('1')
+	describe('getAndSetUser', () => {
+		// The MOCK objects only include one half of the response obj each.
+		// error is implicitely undefined for MOCK_DATA and vice-versa
 
-		expect(t).toEqual(MOCK_DATA)
+		test('returns a user when a user is provided', async () => {
+			global.fetch = jest
+				.fn()
+				.mockImplementation(
+					jest.fn(() =>
+						Promise.resolve({ json: () => Promise.resolve(MOCK_DATA) })
+					) as jest.Mock
+				)
+
+			const response = await getAndSetUser('token')
+			expect(response).toEqual(MOCK_DATA)
+		})
+
+		test('returns an error when an error is provided', async () => {
+			global.fetch = jest
+				.fn()
+				.mockImplementation(
+					jest.fn(() =>
+						Promise.resolve({ json: () => Promise.resolve(MOCK_ERROR) })
+					) as jest.Mock
+				)
+
+			const response = await getAndSetUser('token')
+			expect(response).toEqual(MOCK_ERROR)
+		})
 	})
 })
