@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Menu, Room } from './Containers'
-import 'bootswatch/dist/lux/bootstrap.min.css'
 import { UserInterface } from './types'
 import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
-import { getAndSetUser } from './Global/utils'
+import { getAndSet } from './Global/utils'
 
 import './App.css'
+import 'bootswatch/dist/lux/bootstrap.min.css'
 
 function App() {
 	const socket = io(`${process.env.REACT_APP_API_URL}`, {
@@ -22,11 +22,13 @@ function App() {
 			const token = Cookies.get('x-auth-cookie')
 
 			if (token) {
-				const userResponse = await getAndSetUser(token)
+				const userResponse = await getAndSet('/auth/login', 'include', token)
 
 				userResponse.data !== undefined
 					? setUser(userResponse.data)
 					: setAppError(userResponse.error)
+
+				Cookies.remove('x-auth-cookie')
 			}
 		})()
 	}, [])
