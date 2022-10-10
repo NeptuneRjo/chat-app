@@ -2,6 +2,7 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
 import { logoutUser } from '../../Api'
+import { logoutAndSetUser } from '../../Global/utils'
 
 type Props = {
 	user: UserInterface | undefined
@@ -9,19 +10,13 @@ type Props = {
 }
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
-	const login = async () => {
-		window.open(`${process.env.REACT_APP_API_URL}/auth/google`, '_self')
-	}
-
 	const logout = async () => {
-		const response = await logoutUser()
-		const json = await response.json()
+		const userResponse = await logoutAndSetUser()
 
-		if (!response.ok) {
-			console.log(json.err)
-		} else {
-			setUser(undefined)
-		}
+		// The userResponse's data will be undefined if successfully logged out.
+		userResponse.data === undefined
+			? setUser(userResponse.data)
+			: console.log(userResponse.error)
 	}
 
 	return (
