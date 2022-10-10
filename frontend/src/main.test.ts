@@ -1,7 +1,7 @@
 import { describe, expect, test } from '@jest/globals'
-import { getAndSetUser } from './Global/utils'
+import { getAndSetUser, logoutAndSetUser } from './Global/utils'
 
-const MOCK_DATA = {
+const MOCK_USER = {
 	data: {
 		_id: '633157796615ad7796d2a563',
 		googleId: '110782799026274343906',
@@ -13,44 +13,58 @@ const MOCK_DATA = {
 }
 
 const MOCK_ERROR = {
-	error: 'User not found',
+	error: 'Error',
 }
 
 const unmockedFetch = global.fetch
 
-describe('App', () => {
+const mockFetch = async (data: object) => {
+	global.fetch = jest
+		.fn()
+		.mockImplementation(
+			jest.fn(() =>
+				Promise.resolve({ json: () => Promise.resolve(data) })
+			) as jest.Mock
+		)
+}
+
+describe('main', () => {
 	afterAll(() => {
 		global.fetch = unmockedFetch
 	})
 
 	describe('getAndSetUser', () => {
 		// The MOCK objects only include one half of the response obj each.
-		// error is implicitely undefined for MOCK_DATA and vice-versa
+		// error is implicitely undefined for MOCK_USER and vice-versa
 
 		test('returns a user when a user is provided', async () => {
-			global.fetch = jest
-				.fn()
-				.mockImplementation(
-					jest.fn(() =>
-						Promise.resolve({ json: () => Promise.resolve(MOCK_DATA) })
-					) as jest.Mock
-				)
+			mockFetch(MOCK_USER)
 
 			const response = await getAndSetUser('token')
-			expect(response).toEqual(MOCK_DATA)
+			expect(response).toEqual(MOCK_USER)
 		})
 
 		test('returns an error when an error is provided', async () => {
-			global.fetch = jest
-				.fn()
-				.mockImplementation(
-					jest.fn(() =>
-						Promise.resolve({ json: () => Promise.resolve(MOCK_ERROR) })
-					) as jest.Mock
-				)
+			mockFetch(MOCK_ERROR)
 
 			const response = await getAndSetUser('token')
 			expect(response).toEqual(MOCK_ERROR)
+		})
+	})
+
+	describe('logoutAndSetUser', () => {
+		test('returns a logged out user', async () => {
+			mockFetch({ data: undefined })
+
+			const response = await logoutAndSetUser()
+			expect(response).toEqual({ data: undefined, error: undefined })
+		})
+
+		test('returns an errror', async () => {
+			mockFetch({ error: 'Error' })
+
+			const response = await logoutAndSetUser()
+			expect(response).toEqual({ data: undefined, error: 'Error' })
 		})
 	})
 })
