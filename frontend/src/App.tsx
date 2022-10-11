@@ -20,15 +20,9 @@ function App() {
 
 	useEffect(() => {
 		;(async () => {
-			const token = Cookies.get('x-auth-cookie')
+			const { data, error } = await getAndSet(getUser)
 
-			if (token) {
-				const { data, error } = await getAndSet(getUser, token)
-
-				data ? setUser(data) : setAppError(error)
-
-				Cookies.remove('x-auth-cookie')
-			}
+			data ? setUser(data) : setAppError(error)
 		})()
 	}, [])
 
