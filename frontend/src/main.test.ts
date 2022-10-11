@@ -50,14 +50,14 @@ describe('main', () => {
 		test('returns a user when a user is provided', async () => {
 			mockFetch(MOCK_USER)
 
-			const response = await getAndSet(getUser, 'token')
+			const response = await getAndSet(getUser)
 			expect(response).toEqual(MOCK_USER)
 		})
 
 		test('returns an error when an error is provided', async () => {
 			mockFetch(MOCK_ERROR)
 
-			const response = await getAndSet(getUser, 'token')
+			const response = await getAndSet(getUser)
 			expect(response).toEqual(MOCK_ERROR)
 		})
 	})
