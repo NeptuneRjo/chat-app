@@ -15,7 +15,11 @@ const port = process.env.PORT || 4000
 const httpServer = createServer(app)
 const io = new Server(httpServer, {
 	cors: {
-		origin: ['http://localhost:3000', 'https://harmony-45tv.onrender.com'],
+		origin: [
+			'http://localhost:3000',
+			'https://harmony-45tv.onrender.com',
+			'https://chat-app-0iem.onrender.com',
+		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 	},
@@ -26,7 +30,11 @@ app.set('trust proxy', 1)
 
 app.use(
 	cors({
-		origin: ['http://localhost:3000'],
+		origin: [
+			'http://localhost:3000',
+			'https://harmony-45tv.onrender.com',
+			'https://chat-app-0iem.onrender.com',
+		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 	})
