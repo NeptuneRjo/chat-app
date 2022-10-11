@@ -27,3 +27,13 @@ passport_1.default.use(new passport_google_oauth2_1.Strategy({
         return done(err, user);
     });
 }));
+passport_1.default.serializeUser(function (user, cb) {
+    process.nextTick(function () {
+        cb(null, user);
+    });
+});
+passport_1.default.deserializeUser(function (user, cb) {
+    process.nextTick(function () {
+        return cb(null, user);
+    });
+});
