@@ -1,5 +1,11 @@
 import { describe, expect, test } from '@jest/globals'
-import { getAndSetUser, logoutAndSetUser } from './Global/utils'
+import { newMessage } from './Api'
+import {
+	logoutAndSetUser,
+	getAndSetRoom,
+	getAndSetUser,
+	getAndSetNewMessage,
+} from './Global/utils'
 
 const MOCK_USER = {
 	data: {
@@ -10,6 +16,11 @@ const MOCK_USER = {
 			'https://lh3.googleusercontent.com/a/ALm5wu06nBlGCIGrALTY5JqS0gH4EgoBZYsmih1mTUPyUg=s96-c',
 		displayName: 'Neptune',
 	},
+}
+
+const MOCK_MESSAGE = {
+	handle: 'Neptune',
+	message: 'Hello World!',
 }
 
 const MOCK_ERROR = {
@@ -65,6 +76,16 @@ describe('main', () => {
 
 			const response = await logoutAndSetUser()
 			expect(response).toEqual({ data: undefined, error: 'Error' })
+		})
+	})
+
+	describe('getAndSet - new message', () => {
+		test('returns the new messages', async () => {
+			mockFetch({ data: MOCK_MESSAGE })
+
+			const response = await getAndSetNewMessage('room-1', MOCK_MESSAGE)
+
+			expect(response).toEqual({ data: MOCK_MESSAGE, error: undefined })
 		})
 	})
 })
