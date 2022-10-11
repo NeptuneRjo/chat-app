@@ -5,6 +5,7 @@ import { Server } from 'socket.io'
 import { connection } from 'mongoose'
 import { createServer } from 'http'
 import { authRoutes, chatRoutes } from './routes'
+import session from 'express-session'
 
 import './config/mongoConfig'
 import 'dotenv/config'
@@ -43,6 +44,19 @@ app.use(
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(passport.initialize())
+
+app.use(
+	session({
+		secret: process.env.EXPRESS_SESSION_SECRET as string,
+		resave: false,
+		saveUninitialized: false,
+		cookie: {
+			secure: true,
+			domain: '.onrender.com',
+			sameSite: 'none',
+		},
+	})
+)
 
 /* <-- Routes --> */
 app.use('/auth', authRoutes)
