@@ -1,11 +1,6 @@
 import { describe, expect, test } from '@jest/globals'
-import { newMessage } from './Api'
-import {
-	logoutAndSetUser,
-	getAndSetRoom,
-	getAndSetUser,
-	getAndSetNewMessage,
-} from './Global/utils'
+import { getUser, logoutUser, newMessage } from './Api'
+import { getAndSet } from './Global/utils'
 
 const MOCK_USER = {
 	data: {
@@ -48,14 +43,14 @@ describe('main', () => {
 		test('returns a user when a user is provided', async () => {
 			mockFetch(MOCK_USER)
 
-			const response = await getAndSetUser('token')
+			const response = await getAndSet(getUser, 'token')
 			expect(response).toEqual(MOCK_USER)
 		})
 
 		test('returns an error when an error is provided', async () => {
 			mockFetch(MOCK_ERROR)
 
-			const response = await getAndSetUser('token')
+			const response = await getAndSet(getUser, 'token')
 			expect(response).toEqual(MOCK_ERROR)
 		})
 	})
@@ -64,14 +59,14 @@ describe('main', () => {
 		test('returns a logged out user', async () => {
 			mockFetch({ data: undefined })
 
-			const response = await logoutAndSetUser()
+			const response = await getAndSet(logoutUser)
 			expect(response).toEqual({ data: undefined, error: undefined })
 		})
 
 		test('returns an errror', async () => {
 			mockFetch({ error: 'Error' })
 
-			const response = await logoutAndSetUser()
+			const response = await getAndSet(logoutUser)
 			expect(response).toEqual({ data: undefined, error: 'Error' })
 		})
 	})
@@ -80,8 +75,7 @@ describe('main', () => {
 		test('returns the new messages', async () => {
 			mockFetch({ data: MOCK_MESSAGE })
 
-			const response = await getAndSetNewMessage('room-1', MOCK_MESSAGE)
-
+			const response = await getAndSet(newMessage, 'room-1', MOCK_MESSAGE)
 			expect(response).toEqual({ data: MOCK_MESSAGE, error: undefined })
 		})
 	})
