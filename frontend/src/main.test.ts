@@ -1,5 +1,5 @@
 import { describe, expect, test } from '@jest/globals'
-import { getUser, logoutUser, newMessage } from './Api'
+import { getRoom, getUser, logoutUser, newMessage } from './Api'
 import { getAndSet } from './Global/utils'
 
 const MOCK_USER = {
@@ -22,6 +22,13 @@ const MOCK_ERROR = {
 	error: 'Error',
 }
 
+const MOCK_ROOM = {
+	_id: '6338abc1410615f2ea203b26',
+	roomId: 'room-1',
+	__v: 0,
+	messages: [],
+}
+
 const unmockedFetch = global.fetch
 
 const mockFetch = async (data: object) => {
@@ -39,7 +46,7 @@ describe('main', () => {
 		global.fetch = unmockedFetch
 	})
 
-	describe('getAndSetUser', () => {
+	describe('getAndSet - login', () => {
 		test('returns a user when a user is provided', async () => {
 			mockFetch(MOCK_USER)
 
@@ -55,7 +62,7 @@ describe('main', () => {
 		})
 	})
 
-	describe('logoutAndSetUser', () => {
+	describe('getAndSet - logout', () => {
 		test('returns a logged out user', async () => {
 			mockFetch({ data: undefined })
 
@@ -63,7 +70,7 @@ describe('main', () => {
 			expect(response).toEqual({ data: undefined, error: undefined })
 		})
 
-		test('returns an errror', async () => {
+		test('returns an error', async () => {
 			mockFetch({ error: 'Error' })
 
 			const response = await getAndSet(logoutUser)
@@ -77,6 +84,29 @@ describe('main', () => {
 
 			const response = await getAndSet(newMessage, 'room-1', MOCK_MESSAGE)
 			expect(response).toEqual({ data: MOCK_MESSAGE, error: undefined })
+		})
+
+		test('returns an error', async () => {
+			mockFetch({ error: 'Error' })
+
+			const response = await getAndSet(newMessage, 'room-1', MOCK_MESSAGE)
+			expect(response).toEqual({ data: undefined, error: 'Error' })
+		})
+	})
+
+	describe('getAndSet - get room', () => {
+		test('returns the room', async () => {
+			mockFetch({ data: MOCK_ROOM })
+
+			const response = await getAndSet(getRoom, 'room-1')
+			expect(response).toEqual({ data: MOCK_ROOM, error: undefined })
+		})
+
+		test('returns an error', async () => {
+			mockFetch({ error: 'Error' })
+
+			const response = await getAndSet(getRoom, 'room-1')
+			expect(response).toEqual({ data: undefined, error: 'Error' })
 		})
 	})
 })
