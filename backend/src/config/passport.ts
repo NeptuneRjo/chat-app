@@ -51,6 +51,6 @@ passport.serializeUser(function (user, cb) {
 
 passport.deserializeUser(function (user, cb) {
 	process.nextTick(function () {
-		return cb(null, user as Express.User)
+		return cb(null, user as any)
 	})
 })
