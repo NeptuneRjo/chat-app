@@ -48,6 +48,8 @@ The frontend is tested with Cypress.
 - `npm run cypress:open` to open the cypress terminal
 - select the `main.cy.ts` file
 
+- `jest` or `npm test` to run the Jest unit testing
+
 Backend:
 
 The backend is tested with Jest and Supertest
