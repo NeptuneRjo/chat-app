@@ -2,7 +2,7 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
 import { logoutUser } from '../../Api'
-import { logoutAndSetUser } from '../../Global/utils'
+import { getAndSet } from '../../Global/utils'
 
 type Props = {
 	user: UserInterface | undefined
@@ -11,12 +11,9 @@ type Props = {
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const logout = async () => {
-		const userResponse = await logoutAndSetUser()
+		const { data, error } = await getAndSet(logoutUser)
 
-		// The userResponse's data will be undefined if successfully logged out.
-		userResponse.data === undefined
-			? setUser(userResponse.data)
-			: console.log(userResponse.error)
+		!data ? setUser(data) : console.log(error)
 	}
 
 	return (

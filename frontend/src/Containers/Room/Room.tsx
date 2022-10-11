@@ -4,7 +4,8 @@ import { Message } from '../../Components'
 import { MessageInterface, UserInterface } from '../../types'
 import { useNavigate, useParams } from 'react-router-dom'
 import './style.css'
-import { getAndSetNewMessage, getAndSetRoom } from '../../Global/utils'
+import { getAndSet } from '../../Global/utils'
+import { getRoom, newMessage } from '../../Api'
 
 type Props = {
 	user: UserInterface | undefined
@@ -53,9 +54,9 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 		}
 
 		;(async () => {
-			const { data, error } = await getAndSetRoom(id as string)
+			const { data, error } = await getAndSet(getRoom, id as string)
 
-			data !== undefined ? setRoom(data.messages) : setRoomError(error)
+			data ? setRoom(data.messages) : setRoomError(error)
 
 			if (roomError) {
 				navigate('/404-not-found')
@@ -69,9 +70,9 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 			message: text,
 		}
 
-		const { data, error } = await getAndSetNewMessage(id as string, message)
+		const { data, error } = await getAndSet(newMessage, id as string, message)
 
-		data !== undefined ? setNewMessages(data.messages) : setRoomError(error)
+		data ? setNewMessages(data.messages) : setRoomError(error)
 	}
 
 	socket.on('chat', async (data: any) => {

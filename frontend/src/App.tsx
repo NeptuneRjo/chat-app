@@ -4,7 +4,8 @@ import { Menu, Room } from './Containers'
 import { UserInterface } from './types'
 import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
-import { getAndSetUser } from './Global/utils'
+import { getAndSet } from './Global/utils'
+import { getUser } from './Api'
 
 import './App.css'
 import 'bootswatch/dist/lux/bootstrap.min.css'
@@ -22,11 +23,9 @@ function App() {
 			const token = Cookies.get('x-auth-cookie')
 
 			if (token) {
-				const userResponse = await getAndSetUser(token)
+				const { data, error } = await getAndSet(getUser, token)
 
-				userResponse.data !== undefined
-					? setUser(userResponse.data)
-					: setAppError(userResponse.error)
+				data ? setUser(data) : setAppError(error)
 
 				Cookies.remove('x-auth-cookie')
 			}
