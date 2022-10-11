@@ -18,7 +18,7 @@ const port = process.env.PORT || 4000;
 const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
     cors: {
-        origin: ['http://localhost:3000'],
+        origin: ['http://localhost:3000', 'https://harmony-45tv.onrender.com'],
         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
         credentials: true,
     },
