@@ -41,7 +41,6 @@ app.use((0, cors_1.default)({
 }));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-app.use(passport_1.default.initialize());
 app.use((0, express_session_1.default)({
     secret: process.env.EXPRESS_SESSION_SECRET,
     resave: false,
@@ -53,6 +52,7 @@ app.use((0, express_session_1.default)({
     },
 }));
 app.use(passport_1.default.session());
+app.use(passport_1.default.initialize());
 /* <-- Routes --> */
 app.use('/auth', routes_1.authRoutes);
 app.use('/chat', routes_1.chatRoutes);
