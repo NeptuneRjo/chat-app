@@ -2,6 +2,7 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
 import { logoutUser } from '../../Api'
+import { getAndSet } from '../../Global/utils'
 
 type Props = {
 	user: UserInterface | undefined
@@ -9,19 +10,10 @@ type Props = {
 }
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
-	const login = async () => {
-		window.open(`${process.env.REACT_APP_API_URL}/auth/google`, '_self')
-	}
-
 	const logout = async () => {
-		const response = await logoutUser()
-		const json = await response.json()
+		const { data, error } = await getAndSet(logoutUser)
 
-		if (!response.ok) {
-			console.log(json.err)
-		} else {
-			setUser(undefined)
-		}
+		!data ? setUser(data) : console.log(error)
 	}
 
 	return (

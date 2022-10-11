@@ -4,8 +4,8 @@ import { Message } from '../../Components'
 import { MessageInterface, UserInterface } from '../../types'
 import { useNavigate, useParams } from 'react-router-dom'
 import './style.css'
+import { getAndSet } from '../../Global/utils'
 import { getRoom, newMessage } from '../../Api'
-import { Socket } from 'socket.io-client'
 
 type Props = {
 	user: UserInterface | undefined
@@ -29,28 +29,34 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 	const [text, setText] = useState<string>('')
 	const [oldId, setOldId] = useState<string>('room-1')
 
+	const setRoom = (messages: MessageInterface[]) => {
+		socket.emit('leave', oldId)
+		socket.emit('join', id)
+
+		setMessages(messages)
+		setOldId(id as string)
+	}
+
+	const setNewMessages = (messages: MessageInterface[]) => {
+		setText('')
+
+		socket.emit('chat', {
+			id,
+			messages,
+		})
+
+		setMessages(messages)
+	}
+
 	useEffect(() => {
-		/*
-			Sets the oldId to id if the user routes to the room they're 
-			already on. If the user chooses a new room, the oldId is maintained and the socket is disconnected from the old room.
-		*/
 		if (id === oldId) {
 			setOldId(id)
 		}
 
 		;(async () => {
-			const response = await getRoom(id as string)
-			const json = await response.json()
+			const { data, error } = await getAndSet(getRoom, id as string)
 
-			if (!response.ok) {
-				setRoomError(json.err)
-			} else {
-				socket.emit('leave', oldId)
-				socket.emit('join', id)
-
-				setMessages(json.data.messages)
-				setOldId(id as string)
-			}
+			data ? setRoom(data.messages) : setRoomError(error)
 
 			if (roomError) {
 				navigate('/404-not-found')
@@ -64,23 +70,9 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 			message: text,
 		}
 
-		const response = await newMessage(id as string, message)
-		const json = await response.json()
-		const { messages } = json.data
+		const { data, error } = await getAndSet(newMessage, id as string, message)
 
-		if (!response.ok) {
-			setRoomError(json.err)
-		} else {
-			setText('')
-
-			// after message is saved to DB, emit to socket.io
-			socket.emit('chat', {
-				id,
-				messages: messages,
-			})
-
-			setMessages(messages)
-		}
+		data ? setNewMessages(data.messages) : setRoomError(error)
 	}
 
 	socket.on('chat', async (data: any) => {
