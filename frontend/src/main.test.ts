@@ -45,9 +45,6 @@ describe('main', () => {
 	})
 
 	describe('getAndSetUser', () => {
-		// The MOCK objects only include one half of the response obj each.
-		// error is implicitely undefined for MOCK_USER and vice-versa
-
 		test('returns a user when a user is provided', async () => {
 			mockFetch(MOCK_USER)
 
