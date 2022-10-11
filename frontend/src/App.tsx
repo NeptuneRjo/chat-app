@@ -1,37 +1,33 @@
 import React, { useEffect, useState } from 'react'
 import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Menu, Room } from './Containers'
-import 'bootswatch/dist/lux/bootstrap.min.css'
-import { getUser } from './Api'
 import { UserInterface } from './types'
-import { io, Socket } from 'socket.io-client'
+import { io } from 'socket.io-client'
 import Cookies from 'js-cookie'
+import { getAndSet } from './Global/utils'
+import { getUser } from './Api'
 
 import './App.css'
+import 'bootswatch/dist/lux/bootstrap.min.css'
 
 function App() {
 	const socket = io(`${process.env.REACT_APP_API_URL}`, {
 		transports: ['websocket'],
 	})
 
-	const [error, setError] = useState<unknown | null>(null)
+	const [appError, setAppError] = useState<unknown | null>(null)
 	const [user, setUser] = useState<undefined | UserInterface>(undefined)
 
 	useEffect(() => {
 		;(async () => {
-			const cookiesJwt = Cookies.get('x-auth-cookie')
+			const token = Cookies.get('x-auth-cookie')
 
-			if (cookiesJwt) {
+			if (token) {
+				const { data, error } = await getAndSet(getUser, token)
+
+				data ? setUser(data) : setAppError(error)
+
 				Cookies.remove('x-auth-cookie')
-
-				const response = await getUser(cookiesJwt)
-				const json = await response.json()
-
-				if (!response.ok) {
-					setError(json.error)
-				} else {
-					setUser(json.data)
-				}
 			}
 		})()
 	}, [])
