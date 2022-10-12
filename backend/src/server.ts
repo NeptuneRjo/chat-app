@@ -3,7 +3,7 @@ import cors from 'cors'
 import passport from 'passport'
 import { Server } from 'socket.io'
 import { connection } from 'mongoose'
-import { createServer } from 'https'
+import { createServer } from 'http'
 import { authRoutes, chatRoutes } from './routes'
 import session from 'express-session'
 

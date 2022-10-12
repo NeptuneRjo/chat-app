@@ -8,7 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const passport_1 = __importDefault(require("passport"));
 const socket_io_1 = require("socket.io");
 const mongoose_1 = require("mongoose");
-const https_1 = require("https");
+const http_1 = require("http");
 const routes_1 = require("./routes");
 const express_session_1 = __importDefault(require("express-session"));
 require("./config/mongoConfig");
@@ -16,7 +16,7 @@ require("dotenv/config");
 require("./config/passport");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
-const httpServer = (0, https_1.createServer)(app);
+const httpServer = (0, http_1.createServer)(app);
 const io = new socket_io_1.Server(httpServer, {
     cors: {
         origin: [
