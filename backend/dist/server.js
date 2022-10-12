@@ -38,6 +38,7 @@ app.use((0, cors_1.default)({
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
 }));
+app.enable('trust proxy');
 app.set('trust proxy', 1);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
