@@ -27,7 +27,6 @@ const io = new Server(httpServer, {
 })
 
 /* <-- Middleware --> */
-// app.set('trust proxy', 1)
 
 app.use(
 	cors({
@@ -50,8 +49,8 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
-			sameSite: false,
-			secure: false,
+			sameSite: 'none',
+			secure: true,
 			httpOnly: true,
 		},
 	})
