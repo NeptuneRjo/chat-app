@@ -46,7 +46,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: true,
 }));
-// app.use(passport.session())
+app.use(passport_1.default.session());
 app.use(passport_1.default.initialize());
 /* <-- Routes --> */
 app.use('/auth', routes_1.authRoutes);

@@ -52,7 +52,7 @@ app.use(
 	})
 )
 
-// app.use(passport.session())
+app.use(passport.session())
 app.use(passport.initialize())
 
 /* <-- Routes --> */

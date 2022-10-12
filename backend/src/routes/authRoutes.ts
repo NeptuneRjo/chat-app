@@ -26,10 +26,7 @@ router.get(
 		failureRedirect: '/auth/failure',
 	}),
 	(req, res) => {
-		req.session.save((err) => {
-			if (err) return res.redirect('/auth/error')
-			res.status(200).redirect(REDIRECT_URL)
-		})
+		res.redirect(REDIRECT_URL)
 	}
 )
 
