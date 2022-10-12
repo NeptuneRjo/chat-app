@@ -47,6 +47,7 @@ app.use((0, express_session_1.default)({
     saveUninitialized: false,
     cookie: {
         secure: process.env.NODE_ENV === 'production',
+        domain: 'onrender.com',
     },
 }));
 app.use(passport_1.default.session());
