@@ -44,7 +44,7 @@ app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, express_session_1.default)({
     secret: process.env.EXPRESS_SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
 }));
 app.use(passport_1.default.session());
 app.use(passport_1.default.initialize());
