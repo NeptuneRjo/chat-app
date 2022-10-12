@@ -48,11 +48,7 @@ app.use(
 	session({
 		secret: process.env.EXPRESS_SESSION_SECRET as string,
 		resave: false,
-		saveUninitialized: false,
-		cookie: {
-			secure: process.env.NODE_ENV === 'production',
-			sameSite: false,
-		},
+		saveUninitialized: true,
 	})
 )
 

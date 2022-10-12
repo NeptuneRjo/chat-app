@@ -44,13 +44,11 @@ passport.use(
 )
 
 passport.serializeUser(function (user, cb) {
-	process.nextTick(function () {
-		cb(null, user)
-	})
+	cb(null, user)
 })
 
-passport.deserializeUser(function (user, cb) {
-	process.nextTick(function () {
-		return cb(null, user as any)
+passport.deserializeUser(function (id, cb) {
+	User.findById(id, (err: unknown, user: any) => {
+		cb(err, user)
 	})
 })

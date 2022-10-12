@@ -28,12 +28,10 @@ passport_1.default.use(new passport_google_oauth2_1.Strategy({
     });
 }));
 passport_1.default.serializeUser(function (user, cb) {
-    process.nextTick(function () {
-        cb(null, user);
-    });
+    cb(null, user);
 });
-passport_1.default.deserializeUser(function (user, cb) {
-    process.nextTick(function () {
-        return cb(null, user);
+passport_1.default.deserializeUser(function (id, cb) {
+    models_1.User.findById(id, (err, user) => {
+        cb(err, user);
     });
 });
