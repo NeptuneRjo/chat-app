@@ -46,8 +46,8 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: false,
-        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'none',
+        secure: false,
         httpOnly: true,
     },
 }));
