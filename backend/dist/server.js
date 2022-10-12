@@ -46,9 +46,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'strict',
         secure: process.env.NODE_ENV === 'production',
-        httpOnly: true,
     },
 }));
 app.use(passport_1.default.session());
