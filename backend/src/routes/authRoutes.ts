@@ -27,6 +27,7 @@ router.get(
 	}),
 	(req, res) => {
 		req.session.save(() => {
+			console.log(req.session.id)
 			res.status(200).redirect(REDIRECT_URL)
 		})
 	}

@@ -21,6 +21,7 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
     failureRedirect: '/auth/failure',
 }), (req, res) => {
     req.session.save(() => {
+        console.log(req.session.id);
         res.status(200).redirect(REDIRECT_URL);
     });
 });
