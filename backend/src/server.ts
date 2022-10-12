@@ -51,7 +51,6 @@ app.use(
 		saveUninitialized: false,
 		cookie: {
 			secure: process.env.NODE_ENV === 'production',
-			domain: 'onrender.com',
 		},
 	})
 )
