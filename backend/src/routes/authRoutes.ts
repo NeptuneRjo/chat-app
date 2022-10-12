@@ -34,6 +34,7 @@ router.get(
 )
 
 router.get('/login', (req, res) => {
+	console.log(req.session.id)
 	res.status(200).json({ data: req.user })
 })
 

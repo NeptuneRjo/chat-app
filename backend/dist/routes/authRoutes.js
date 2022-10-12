@@ -26,6 +26,7 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
     });
 });
 router.get('/login', (req, res) => {
+    console.log(req.session.id);
     res.status(200).json({ data: req.user });
 });
 router.get('/failure', (req, res) => {
