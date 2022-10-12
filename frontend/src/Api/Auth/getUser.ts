@@ -6,7 +6,7 @@ export const getUser = async (): Promise<Response> => {
 			headers: {
 				'Content-type': 'application/json; charset=UTF-8',
 			},
-			credentials: 'same-origin',
+			credentials: 'include',
 		}
 	)
 
