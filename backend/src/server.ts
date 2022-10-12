@@ -51,7 +51,6 @@ app.use(
 		saveUninitialized: false,
 		cookie: {
 			secure: true,
-			domain: '.onrender.com',
 			sameSite: 'none',
 		},
 	})

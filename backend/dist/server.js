@@ -47,7 +47,6 @@ app.use((0, express_session_1.default)({
     saveUninitialized: false,
     cookie: {
         secure: true,
-        domain: '.onrender.com',
         sameSite: 'none',
     },
 }));
