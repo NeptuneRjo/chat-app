@@ -29,6 +29,7 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 /* <-- Middleware --> */
+app.set('trust proxy', 1);
 app.use((0, cors_1.default)({
     origin: [
         'http://localhost:3000',
@@ -45,8 +46,8 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        sameSite: 'none',
-        secure: true,
+        sameSite: false,
+        secure: process.env.NODE_ENV === 'production',
         httpOnly: true,
     },
 }));
