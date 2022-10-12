@@ -24,6 +24,7 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
     res.redirect(REDIRECT_URL);
 });
 router.get('/login', (req, res) => {
+    console.log('login', req.user);
     res.status(200).json({ data: req.user });
 });
 router.get('/failure', (req, res) => {

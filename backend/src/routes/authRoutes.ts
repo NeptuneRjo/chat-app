@@ -32,6 +32,7 @@ router.get(
 )
 
 router.get('/login', (req, res) => {
+	console.log('login', req.user)
 	res.status(200).json({ data: req.user })
 })
 
