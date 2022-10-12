@@ -26,6 +26,7 @@ router.get(
 		failureRedirect: '/auth/failure',
 	}),
 	(req, res) => {
+		console.log(req.user)
 		res.redirect(REDIRECT_URL)
 	}
 )
