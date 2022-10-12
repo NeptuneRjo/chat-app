@@ -23,14 +23,9 @@ router.get('/logout', (req, res, next) => {
 router.get(
 	'/google/callback',
 	passport.authenticate('google', {
+		successRedirect: REDIRECT_URL,
 		failureRedirect: '/auth/failure',
-	}),
-	(req, res) => {
-		req.session.save(() => {
-			console.log(req.session.id)
-			res.status(200).redirect(REDIRECT_URL)
-		})
-	}
+	})
 )
 
 router.get('/login', (req, res) => {
