@@ -29,7 +29,6 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 /* <-- Middleware --> */
-app.set('trust proxy', 1);
 app.use((0, cors_1.default)({
     origin: [
         'http://localhost:3000',
@@ -39,12 +38,17 @@ app.use((0, cors_1.default)({
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
 }));
+app.set('trust proxy', 1);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 app.use((0, express_session_1.default)({
     secret: process.env.EXPRESS_SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
+    cookie: {
+        sameSite: 'none',
+        secure: true,
+    },
 }));
 app.use(passport_1.default.session());
 app.use(passport_1.default.initialize());

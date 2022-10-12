@@ -27,7 +27,6 @@ const io = new Server(httpServer, {
 })
 
 /* <-- Middleware --> */
-app.set('trust proxy', 1)
 
 app.use(
 	cors({
@@ -41,6 +40,8 @@ app.use(
 	})
 )
 
+app.set('trust proxy', 1)
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
@@ -48,7 +49,11 @@ app.use(
 	session({
 		secret: process.env.EXPRESS_SESSION_SECRET as string,
 		resave: false,
-		saveUninitialized: true,
+		saveUninitialized: false,
+		cookie: {
+			sameSite: 'none',
+			secure: true,
+		},
 	})
 )
 
