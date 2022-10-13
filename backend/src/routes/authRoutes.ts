@@ -26,13 +26,12 @@ router.get(
 		failureRedirect: '/auth/failure',
 	}),
 	(req, res) => {
-		console.log(req.user)
 		res.redirect(REDIRECT_URL)
 	}
 )
 
 router.get('/login', (req, res) => {
-	res.cookie('x-auth-header', req.session.id, {
+	res.cookie('x-auth-header', 'Hello world', {
 		sameSite: 'none',
 		secure: true,
 	})
