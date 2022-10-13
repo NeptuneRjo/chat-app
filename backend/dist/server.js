@@ -29,12 +29,22 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 /* <-- Middleware --> */
+const allowedOrigins = [
+    'http://localhost:3000',
+    'https://harmony-45tv.onrender.com',
+];
 app.use((0, cors_1.default)({
-    origin: [
-        'http://localhost:3000',
-        'https://harmony-45tv.onrender.com',
-        'https://chat-app-0iem.onrender.com',
-    ],
+    origin: function (origin, callback) {
+        // allow requests with no origin
+        // (like mobile apps or curl requests)
+        if (!origin)
+            return callback(null, true);
+        if (allowedOrigins.indexOf(origin) === -1) {
+            var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+        return callback(null, true);
+    },
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
 }));
