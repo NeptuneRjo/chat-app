@@ -24,6 +24,10 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
     res.redirect(REDIRECT_URL);
 });
 router.get('/login', (req, res) => {
+    res.cookie('x-auth-header', req.session.id, {
+        sameSite: 'none',
+        secure: true,
+    });
     res.status(200).json({ data: req.user });
 });
 router.get('/failure', (req, res) => {

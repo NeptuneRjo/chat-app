@@ -32,6 +32,10 @@ router.get(
 )
 
 router.get('/login', (req, res) => {
+	res.cookie('x-auth-header', req.session.id, {
+		sameSite: 'none',
+		secure: true,
+	})
 	res.status(200).json({ data: req.user })
 })
 
