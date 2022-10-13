@@ -9,9 +9,6 @@ The main project is completed\*, test suites are under way.
 
 ## Demonstration
 
-Due to the nature of `PassportJs'` Google-Oauth2 Strategy, and because I do not have access to a hosting service that allows both Express and React
-hosting on the same domain, there is no page to visit for this project.
-
 Please view this demonstration of the app being used on localhost through two different google accounts.
 
 [![Watch the video](https://img.youtube.com/vi/5FtekUkGkUc/maxresdefault.jpg)](https://youtu.be/5FtekUkGkUc)
