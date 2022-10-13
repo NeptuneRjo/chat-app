@@ -3,7 +3,7 @@ import cors from 'cors'
 import passport from 'passport'
 import { Server } from 'socket.io'
 import { connection } from 'mongoose'
-import { createServer } from 'http'
+import http from 'http'
 import { authRoutes, chatRoutes } from './routes'
 import session from 'express-session'
 
@@ -13,7 +13,9 @@ import './config/passport'
 
 const app = express()
 const port = process.env.PORT || 4000
-const httpServer = createServer(app)
+
+const httpServer = http.createServer(app)
+
 const io = new Server(httpServer, {
 	cors: {
 		origin: [
@@ -51,7 +53,7 @@ app.use(
 		saveUninitialized: true,
 		cookie: {
 			sameSite: 'none',
-			secure: true,
+			secure: false,
 		},
 	})
 )
