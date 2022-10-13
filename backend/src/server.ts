@@ -48,7 +48,7 @@ app.use(
 	session({
 		secret: EXPRESS_SESSION_SECRET,
 		resave: false,
-		saveUninitialized: false,
+		saveUninitialized: true,
 		cookie: {
 			sameSite: 'none',
 			secure: false,
@@ -56,8 +56,8 @@ app.use(
 	})
 )
 
-app.use(passport.session())
 app.use(passport.initialize())
+app.use(passport.session())
 
 /* <-- Routes --> */
 app.use('/auth', authRoutes)

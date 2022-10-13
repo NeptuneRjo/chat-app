@@ -42,14 +42,14 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET;
 app.use((0, express_session_1.default)({
     secret: EXPRESS_SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
         sameSite: 'none',
         secure: false,
     },
 }));
-app.use(passport_1.default.session());
 app.use(passport_1.default.initialize());
+app.use(passport_1.default.session());
 /* <-- Routes --> */
 app.use('/auth', routes_1.authRoutes);
 app.use('/chat', routes_1.chatRoutes);
