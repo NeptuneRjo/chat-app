@@ -50,7 +50,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
-			sameSite: 'none',
+			sameSite: false,
 			secure: false,
 		},
 	})

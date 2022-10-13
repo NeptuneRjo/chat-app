@@ -13,7 +13,11 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const logout = async () => {
 		const { data, error } = await getAndSet(logoutUser)
 
-		!data ? setUser(data) : console.log(error)
+		setUser(undefined)
+
+		if (error) {
+			console.log(error)
+		}
 	}
 
 	return (
