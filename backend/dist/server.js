@@ -44,8 +44,8 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        sameSite: 'none',
-        secure: false,
+        sameSite: 'strict',
+        secure: true,
     },
 }));
 app.use(passport_1.default.initialize());
