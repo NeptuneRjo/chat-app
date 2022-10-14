@@ -54,7 +54,6 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
-			domain: '216.24.57.3',
 		},
 	})
 )
