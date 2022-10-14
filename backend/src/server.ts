@@ -52,7 +52,7 @@ app.use(
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
-			sameSite: 'lax',
+			sameSite: 'none',
 			secure: true,
 		},
 	})
