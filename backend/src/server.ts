@@ -32,7 +32,7 @@ const io = new Server(httpServer, {
 
 app.use(
 	cors({
-		origin: ['http://localhost:3000', 'https://harmony-45tv.onrender.com'],
+		origin: true,
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 		preflightContinue: true,
