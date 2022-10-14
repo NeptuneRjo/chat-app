@@ -35,6 +35,7 @@ app.use(
 		origin: ['http://localhost:3000', 'https://harmony-45tv.onrender.com'],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
+		preflightContinue: true,
 	})
 )
 
