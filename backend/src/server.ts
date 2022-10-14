@@ -54,7 +54,7 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
-			domain: 'onrender.com',
+			domain: '216.24.57.3',
 		},
 	})
 )
