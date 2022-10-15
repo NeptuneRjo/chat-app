@@ -30,19 +30,13 @@ const io = new socket_io_1.Server(httpServer, {
     },
 });
 /* <-- Middleware --> */
-const whitelist = ['http://localhost:3000', 'https://harmony-45tv.onrender.com'];
 app.use((0, cors_1.default)({
-    origin: function (origin, callback) {
-        console.log('** Origin of request ' + origin);
-        if (whitelist.indexOf(origin) !== -1 || !origin) {
-            console.log('Origin acceptable');
-            callback(null, true);
-        }
-        else {
-            console.log('Origin rejected');
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    origin: [
+        'http://localhost:3000',
+        'https://harmony-45tv.onrender.com',
+        'https://chat-app-0iem.onrender.com',
+        'http://localhost:10000',
+    ],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
     preflightContinue: true,
@@ -56,6 +50,7 @@ app.use((0, express_session_1.default)({
     secret: EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    name: 'harmony',
     cookie: {
         sameSite: 'none',
         secure: true,
