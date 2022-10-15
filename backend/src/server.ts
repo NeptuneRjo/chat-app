@@ -33,7 +33,7 @@ const io = new Server(httpServer, {
 
 app.use(
 	cors({
-		origin: false,
+		origin: true,
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 		preflightContinue: true,
