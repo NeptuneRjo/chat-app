@@ -22,6 +22,7 @@ const io = new Server(httpServer, {
 			'http://localhost:3000',
 			'https://harmony-45tv.onrender.com',
 			'https://chat-app-0iem.onrender.com',
+			'http://localhost:10000',
 		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
@@ -32,7 +33,12 @@ const io = new Server(httpServer, {
 
 app.use(
 	cors({
-		origin: true,
+		origin: [
+			'http://localhost:3000',
+			'https://harmony-45tv.onrender.com',
+			'https://chat-app-0iem.onrender.com',
+			'http://localhost:10000',
+		],
 		methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
 		credentials: true,
 		preflightContinue: true,

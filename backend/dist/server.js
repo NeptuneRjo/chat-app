@@ -23,6 +23,7 @@ const io = new socket_io_1.Server(httpServer, {
             'http://localhost:3000',
             'https://harmony-45tv.onrender.com',
             'https://chat-app-0iem.onrender.com',
+            'http://localhost:10000',
         ],
         methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
         credentials: true,
@@ -30,7 +31,12 @@ const io = new socket_io_1.Server(httpServer, {
 });
 /* <-- Middleware --> */
 app.use((0, cors_1.default)({
-    origin: true,
+    origin: [
+        'http://localhost:3000',
+        'https://harmony-45tv.onrender.com',
+        'https://chat-app-0iem.onrender.com',
+        'http://localhost:10000',
+    ],
     methods: ['POST', 'PUT', 'GET', 'OPTIONS', 'HEAD', 'DELETE', 'PATCH'],
     credentials: true,
     preflightContinue: true,
