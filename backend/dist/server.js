@@ -60,7 +60,7 @@ app.use((0, express_session_1.default)({
     resave: false,
     saveUninitialized: true,
     cookie: {
-        sameSite: 'none',
+        // sameSite: 'none',
         secure: true,
         domain: 'chat-app-0iem.onrender.com',
     },
