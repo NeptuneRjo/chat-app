@@ -69,10 +69,10 @@ app.use(
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
-			sameSite: 'none',
+			sameSite: 'strict',
 			secure: true,
 			domain: 'chat-app-0iem.onrender.com',
-			httpOnly: false,
+			// httpOnly: false,
 		},
 		proxy: true,
 	})
