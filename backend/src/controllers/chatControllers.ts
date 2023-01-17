@@ -10,7 +10,6 @@ export const get_room = async (req: Request, res: Response) => {
 
 	const room = await Room.findOne({ roomId: id })
 
-	res.cookie('test', 'hello-world')
 	if (room) {
 		res.status(200).json({ data: room })
 	} else {

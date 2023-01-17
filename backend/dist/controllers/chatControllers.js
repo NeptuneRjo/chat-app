@@ -8,7 +8,6 @@ const notFoundError = {
 const get_room = async (req, res) => {
     const { id } = req.params;
     const room = await models_1.Room.findOne({ roomId: id });
-    res.cookie('test', 'hello-world');
     if (room) {
         res.status(200).json({ data: room });
     }
