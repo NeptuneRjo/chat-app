@@ -10,6 +10,7 @@ import session from 'express-session'
 import './config/mongoConfig'
 import 'dotenv/config'
 import './config/passport'
+// import './config/authStrategies'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -62,7 +63,9 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
+			domain: '*.onrender.com',
 		},
+		proxy: true,
 	})
 )
 

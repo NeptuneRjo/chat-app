@@ -14,6 +14,7 @@ const express_session_1 = __importDefault(require("express-session"));
 require("./config/mongoConfig");
 require("dotenv/config");
 require("./config/passport");
+// import './config/authStrategies'
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 const httpServer = http_1.default.createServer(app);
@@ -54,7 +55,9 @@ app.use((0, express_session_1.default)({
     cookie: {
         sameSite: 'none',
         secure: true,
+        domain: '*.onrender.com',
     },
+    proxy: true,
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());
