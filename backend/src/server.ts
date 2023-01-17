@@ -71,6 +71,7 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
+			domain: 'harmony-static.onrender.com',
 		},
 		proxy: true,
 	})
