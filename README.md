@@ -2,14 +2,11 @@
 
 Harmony is a fullstack application that allows users to send and view messages in the real time.
 
-## Project status
-
-This project is currently under development.
-The main project is completed\*, test suites are under way.
+You can visit it [here](https://harmony-45tv.onrender.com), however, because of the nature of express-session, you will need to allow cross-site cookies in your browser to log in.
 
 ## Demonstration
 
-Please view this demonstration of the app being used on localhost through two different google accounts.
+Click on the image below to view this demonstration of the app being used on localhost through two different google accounts.
 
 [![Watch the video](https://img.youtube.com/vi/5FtekUkGkUc/maxresdefault.jpg)](https://youtu.be/5FtekUkGkUc)
 
