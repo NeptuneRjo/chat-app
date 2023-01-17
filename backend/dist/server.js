@@ -63,7 +63,6 @@ app.use((0, express_session_1.default)({
     cookie: {
         sameSite: 'none',
         secure: true,
-        domain: '*.onrender.com',
     },
     proxy: true,
 }));
