@@ -21,7 +21,7 @@ const io = new Server(httpServer, {
 	cors: {
 		origin: [
 			'http://localhost:3000',
-			'https://harmony-45tv.onrender.com',
+			'https://harmony-static.onrender.com',
 			'https://chat-app-0iem.onrender.com',
 			'http://localhost:10000',
 		],
@@ -36,7 +36,7 @@ app.use(
 	cors({
 		origin: [
 			'http://localhost:3000',
-			'https://harmony-45tv.onrender.com',
+			'https://harmony-static.onrender.com',
 			'https://chat-app-0iem.onrender.com',
 			'http://localhost:10000',
 		],
@@ -46,14 +46,14 @@ app.use(
 	})
 )
 
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*')
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Origin, X-Requested-With, Content-Type, Accept'
-	)
-	next()
-})
+// app.use(function (req, res, next) {
+// 	res.header('Access-Control-Allow-Origin', '*')
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Origin, X-Requested-With, Content-Type, Accept'
+// 	)
+// 	next()
+// })
 
 app.enable('trust proxy')
 app.set('trust proxy', 1)

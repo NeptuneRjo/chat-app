@@ -22,7 +22,7 @@ const io = new socket_io_1.Server(httpServer, {
     cors: {
         origin: [
             'http://localhost:3000',
-            'https://harmony-45tv.onrender.com',
+            'https://harmony-static.onrender.com',
             'https://chat-app-0iem.onrender.com',
             'http://localhost:10000',
         ],
@@ -34,7 +34,7 @@ const io = new socket_io_1.Server(httpServer, {
 app.use((0, cors_1.default)({
     origin: [
         'http://localhost:3000',
-        'https://harmony-45tv.onrender.com',
+        'https://harmony-static.onrender.com',
         'https://chat-app-0iem.onrender.com',
         'http://localhost:10000',
     ],
@@ -42,11 +42,14 @@ app.use((0, cors_1.default)({
     credentials: true,
     preflightContinue: true,
 }));
-app.use(function (req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    next();
-});
+// app.use(function (req, res, next) {
+// 	res.header('Access-Control-Allow-Origin', '*')
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Origin, X-Requested-With, Content-Type, Accept'
+// 	)
+// 	next()
+// })
 app.enable('trust proxy');
 app.set('trust proxy', 1);
 app.use(express_1.default.json());
