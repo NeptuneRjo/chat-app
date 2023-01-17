@@ -78,6 +78,15 @@ app.use(
 	})
 )
 
+app.use(function (req, res, next) {
+	res.set('credentials', 'include')
+	res.set(
+		'Access-Control-Allow-Headers',
+		'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept'
+	)
+	next()
+})
+
 app.use(passport.initialize())
 app.use(passport.session())
 
