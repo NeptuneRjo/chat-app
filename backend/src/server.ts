@@ -72,7 +72,7 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
-			domain: 'chat-app-0iem.onrender.com',
+			domain: '*.onrender.com',
 		},
 		proxy: true,
 	})
