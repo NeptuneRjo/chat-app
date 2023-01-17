@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
+import { User } from '../models'
 import 'dotenv/config'
 
 const router = Router()
@@ -24,8 +25,12 @@ router.get(
 	'/google/callback',
 	passport.authenticate('google', {
 		failureRedirect: '/auth/failure',
+		// session: false,
 	}),
 	(req, res) => {
+		// const user = req.user as any
+		// const token = user.generateJWT()
+
 		res.redirect(REDIRECT_URL)
 	}
 )

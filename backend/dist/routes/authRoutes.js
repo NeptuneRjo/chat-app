@@ -19,7 +19,10 @@ router.get('/logout', (req, res, next) => {
 });
 router.get('/google/callback', passport_1.default.authenticate('google', {
     failureRedirect: '/auth/failure',
+    // session: false,
 }), (req, res) => {
+    // const user = req.user as any
+    // const token = user.generateJWT()
     res.redirect(REDIRECT_URL);
 });
 router.get('/login', (req, res) => {
