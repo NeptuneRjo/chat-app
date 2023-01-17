@@ -59,7 +59,6 @@ app.use((0, express_session_1.default)({
     secret: EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    name: 'harmony',
     cookie: {
         sameSite: 'none',
         secure: true,
