@@ -63,6 +63,7 @@ app.use((0, express_session_1.default)({
         sameSite: 'none',
         secure: true,
         domain: 'chat-app-0iem.onrender.com',
+        httpOnly: false,
     },
     proxy: true,
 }));

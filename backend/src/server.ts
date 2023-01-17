@@ -72,6 +72,7 @@ app.use(
 			sameSite: 'none',
 			secure: true,
 			domain: 'chat-app-0iem.onrender.com',
+			httpOnly: false,
 		},
 		proxy: true,
 	})
