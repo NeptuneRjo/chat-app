@@ -69,7 +69,7 @@ app.use(
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
-			sameSite: false,
+			sameSite: 'none',
 			secure: true,
 			domain: 'chat-app-0iem.onrender.com',
 		},
