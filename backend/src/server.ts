@@ -71,7 +71,7 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
-			domain: 'harmony-static.onrender.com',
+			domain: 'chat-app-0iem.onrender.com',
 		},
 		proxy: true,
 	})
