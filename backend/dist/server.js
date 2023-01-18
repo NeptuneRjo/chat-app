@@ -61,16 +61,18 @@ app.use((0, express_session_1.default)({
     secret: EXPRESS_SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        domain: 'chat-app-0iem.onrender.com',
-        httpOnly: false,
-    },
+    // cookie: {
+    // 	sameSite: 'none',
+    // 	secure: true,
+    // 	domain: 'chat-app-0iem.onrender.com',
+    // 	httpOnly: false,
+    // },
     store: connect_mongo_1.default.create({
         mongoUrl: MONGO_SESSION_URI,
+        autoRemove: 'interval',
+        autoRemoveInterval: 10,
     }),
-    proxy: true,
+    // proxy: true,
 }));
 app.use(passport_1.default.initialize());
 app.use(passport_1.default.session());

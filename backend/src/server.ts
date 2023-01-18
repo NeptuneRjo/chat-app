@@ -70,16 +70,18 @@ app.use(
 		secret: EXPRESS_SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
-		cookie: {
-			sameSite: 'none',
-			secure: true,
-			domain: 'chat-app-0iem.onrender.com',
-			httpOnly: false,
-		},
+		// cookie: {
+		// 	sameSite: 'none',
+		// 	secure: true,
+		// 	domain: 'chat-app-0iem.onrender.com',
+		// 	httpOnly: false,
+		// },
 		store: MongoStore.create({
 			mongoUrl: MONGO_SESSION_URI,
+			autoRemove: 'interval',
+			autoRemoveInterval: 10,
 		}),
-		proxy: true,
+		// proxy: true,
 	})
 )
 
