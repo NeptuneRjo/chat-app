@@ -32,7 +32,7 @@ router.get(
 		// const token = user.generateJWT()
 
 		// res.redirect(REDIRECT_URL)
-		res.send('hello world')
+		res.send(req.user)
 	}
 )
 
