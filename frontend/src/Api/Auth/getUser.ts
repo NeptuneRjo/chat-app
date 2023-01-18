@@ -1,4 +1,5 @@
 export const getUser = async (): Promise<Response> => {
+	console.log('GET REQUEST')
 	const response: Response = await fetch(
 		`${process.env.REACT_APP_API_URL}/auth/login`,
 		{
@@ -10,5 +11,6 @@ export const getUser = async (): Promise<Response> => {
 		}
 	)
 
+	console.log(response)
 	return response
 }
