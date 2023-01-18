@@ -30,8 +30,7 @@ router.get(
 	(req, res) => {
 		// const user = req.user as any
 		// const token = user.generateJWT()
-
-		res.redirect(REDIRECT_URL)
+		// res.redirect(REDIRECT_URL)
 	}
 )
 
