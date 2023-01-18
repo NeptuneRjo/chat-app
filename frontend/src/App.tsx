@@ -3,7 +3,6 @@ import { HashRouter, Route, Routes, Navigate } from 'react-router-dom'
 import { Menu, Room } from './Containers'
 import { UserInterface } from './types'
 import { io } from 'socket.io-client'
-import Cookies from 'js-cookie'
 import { getAndSet } from './Global/utils'
 import { getUser } from './Api'
 
@@ -21,6 +20,7 @@ function App() {
 	useEffect(() => {
 		;(async () => {
 			const { data, error } = await getAndSet(getUser)
+			console.log('get user')
 
 			data ? setUser(data) : setAppError(error)
 		})()
