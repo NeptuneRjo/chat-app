@@ -79,6 +79,7 @@ app.use(
 		cookie: {
 			sameSite: 'none',
 			secure: true,
+			domain: '*.onrender.com',
 		},
 		store: MongoStore.create({
 			mongoUrl: MONGO_SESSION_URI,
