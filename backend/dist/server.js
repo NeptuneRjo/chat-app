@@ -67,6 +67,9 @@ app.use((0, express_session_1.default)({
     // 	domain: 'chat-app-0iem.onrender.com',
     // 	httpOnly: false,
     // },
+    cookie: {
+        sameSite: 'none',
+    },
     store: connect_mongo_1.default.create({
         mongoUrl: MONGO_SESSION_URI,
         autoRemove: 'interval',

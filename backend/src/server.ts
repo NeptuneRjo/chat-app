@@ -76,6 +76,9 @@ app.use(
 		// 	domain: 'chat-app-0iem.onrender.com',
 		// 	httpOnly: false,
 		// },
+		cookie: {
+			sameSite: 'none',
+		},
 		store: MongoStore.create({
 			mongoUrl: MONGO_SESSION_URI,
 			autoRemove: 'interval',
