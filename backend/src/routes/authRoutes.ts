@@ -31,8 +31,8 @@ router.get(
 		// const user = req.user as any
 		// const token = user.generateJWT()
 
-		// res.redirect(REDIRECT_URL)
-		res.send(req.user)
+		res.cookie('test', 'hello world')
+		res.redirect(REDIRECT_URL)
 	}
 )
 
