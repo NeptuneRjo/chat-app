@@ -73,13 +73,13 @@ app.use(
 		// cookie: {
 		// 	sameSite: 'none',
 		// 	secure: true,
-		// 	domain: 'chat-app-0iem.onrender.com',
+		// domain: 'chat-app-0iem.onrender.com',
 		// 	httpOnly: false,
 		// },
 		cookie: {
 			sameSite: 'none',
 			secure: true,
-			domain: 'onrender.com',
+			domain: 'chat-app-0iem.onrender.com',
 		},
 		store: MongoStore.create({
 			mongoUrl: MONGO_SESSION_URI,
