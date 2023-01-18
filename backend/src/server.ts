@@ -78,6 +78,7 @@ app.use(
 		// },
 		cookie: {
 			sameSite: 'none',
+			secure: true,
 		},
 		store: MongoStore.create({
 			mongoUrl: MONGO_SESSION_URI,
