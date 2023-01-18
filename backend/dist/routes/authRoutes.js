@@ -23,8 +23,10 @@ router.get('/google/callback', passport_1.default.authenticate('google', {
 }), (req, res) => {
     // const user = req.user as any
     // const token = user.generateJWT()
-    res.cookie('test', 'hello world');
-    res.redirect(REDIRECT_URL);
+    req.session.regenerate(function () {
+        res.cookie('test', 'hello world');
+        res.redirect(REDIRECT_URL);
+    });
 });
 router.get('/login', (req, res) => {
     console.log(req.cookies);

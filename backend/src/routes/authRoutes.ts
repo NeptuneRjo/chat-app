@@ -30,9 +30,10 @@ router.get(
 	(req, res) => {
 		// const user = req.user as any
 		// const token = user.generateJWT()
-
-		res.cookie('test', 'hello world')
-		res.redirect(REDIRECT_URL)
+		req.session.regenerate(function () {
+			res.cookie('test', 'hello world')
+			res.redirect(REDIRECT_URL)
+		})
 	}
 )
 
