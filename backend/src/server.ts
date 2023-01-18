@@ -6,6 +6,7 @@ import { connection } from 'mongoose'
 import http from 'http'
 import { authRoutes, chatRoutes } from './routes'
 import session from 'express-session'
+import { MongoDBStore } from 'connect-mongodb-session'
 
 import './config/mongoConfig'
 import 'dotenv/config'
@@ -62,6 +63,12 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET as string
+const MONGO_STORE_URI = process.env.MONGO_STORE_URI as string
+
+const store = new MongoDBStore({
+	uri: MONGO_STORE_URI,
+	collection: 'chat-app-sessions',
+})
 
 app.use(
 	session({
@@ -74,6 +81,7 @@ app.use(
 			domain: 'chat-app-0iem.onrender.com',
 			httpOnly: false,
 		},
+		store: store,
 		proxy: true,
 	})
 )

@@ -11,6 +11,7 @@ const mongoose_1 = require("mongoose");
 const http_1 = __importDefault(require("http"));
 const routes_1 = require("./routes");
 const express_session_1 = __importDefault(require("express-session"));
+const connect_mongodb_session_1 = require("connect-mongodb-session");
 require("./config/mongoConfig");
 require("dotenv/config");
 require("./config/passport");
@@ -55,6 +56,11 @@ app.set('trust proxy', 1);
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET;
+const MONGO_STORE_URI = process.env.MONGO_STORE_URI;
+const store = new connect_mongodb_session_1.MongoDBStore({
+    uri: MONGO_STORE_URI,
+    collection: 'chat-app-sessions',
+});
 app.use((0, express_session_1.default)({
     secret: EXPRESS_SESSION_SECRET,
     resave: false,
@@ -65,6 +71,7 @@ app.use((0, express_session_1.default)({
         domain: 'chat-app-0iem.onrender.com',
         httpOnly: false,
     },
+    store: store,
     proxy: true,
 }));
 app.use(passport_1.default.initialize());
