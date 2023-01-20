@@ -1,48 +1,21 @@
 import { Router } from 'express'
 import passport from 'passport'
-import { User } from '../models'
-import 'dotenv/config'
+import {
+	post_register_user,
+	post_login_user,
+	get_logout_user,
+} from '../controllers/authControllers'
 
 const router = Router()
 
-const REDIRECT_URL = process.env.REDIRECT_URL as string
+router.get('/logout', get_logout_user)
 
-// Login and/or Signup
-router.get(
-	'/google',
-	passport.authenticate('google', {
-		scope: ['email', 'profile'],
-	})
+router.post(
+	'/login',
+	passport.authenticate('local', { session: false }),
+	post_login_user
 )
 
-router.get('/logout', (req, res, next) => {
-	req.session.destroy(() => {
-		res.status(200).json({ data: req.user })
-	})
-})
-
-router.get(
-	'/google/callback',
-	passport.authenticate('google', {
-		failureRedirect: '/auth/failure',
-		// session: false,
-	}),
-	(req, res) => {
-		// const user = req.user as any
-		// const token = user.generateJWT()
-
-		res.cookie('test', 'hello world')
-		res.redirect(REDIRECT_URL)
-	}
-)
-
-router.get('/login', (req, res) => {
-	console.log(req.cookies)
-	res.status(200).json({ data: req.user })
-})
-
-router.get('/failure', (req, res) => {
-	res.send('something went wrong')
-})
+router.post('/register', post_register_user)
 
 export default router
