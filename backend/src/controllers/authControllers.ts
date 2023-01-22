@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import passport from 'passport'
+import jwt from 'jsonwebtoken'
 import { User } from '../models'
 import { Request, Response } from 'express'
 import 'dotenv/config'
@@ -33,13 +34,24 @@ export const post_register_user = async (req: Request, res: Response) => {
 }
 
 export const post_login_user = async (req: Request, res: Response) => {
-	const { username, rooms } = req.user as any
+	const secretOrKey = process.env.JWT_SECRET_DEV as string
+
+	const { username, rooms, _id } = req.user as any
+	const token = jwt.sign(
+		{
+			expiresIn: '12h',
+			id: _id,
+			username: username,
+		},
+		secretOrKey
+	)
 
 	res.json({
 		message: 'Login successful',
 		data: {
 			user: username,
 			rooms: rooms,
+			token: token,
 		},
 	})
 }

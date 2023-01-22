@@ -8,10 +8,9 @@ import { authRoutes, chatRoutes } from './routes'
 import session from 'express-session'
 
 import './config/mongoConfig'
+import './config/authStrategies'
+
 import 'dotenv/config'
-import './config/passport'
-import MongoStore from 'connect-mongo'
-// import './config/authStrategies'
 
 const app = express()
 const port = process.env.PORT || 4000
@@ -65,37 +64,37 @@ app.use(express.urlencoded({ extended: false }))
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET as string
 const MONGO_SESSION_URI = process.env.MONGO_SESSION_URI as string
 
-app.use(
-	session({
-		secret: EXPRESS_SESSION_SECRET,
-		resave: false,
-		saveUninitialized: true,
-		// cookie: {
-		// 	sameSite: 'none',
-		// 	secure: true,
-		// domain: 'chat-app-0iem.onrender.com',
-		// 	httpOnly: false,
-		// },
-		cookie: {
-			sameSite: 'none',
-			secure: true,
-			domain: 'chat-app-0iem.onrender.com',
-		},
-		store: MongoStore.create({
-			mongoUrl: MONGO_SESSION_URI,
-			autoRemove: 'interval',
-			autoRemoveInterval: 10,
-		}),
-		// proxy: true,
-	})
-)
+// app.use(
+// 	session({
+// 		secret: EXPRESS_SESSION_SECRET,
+// 		resave: false,
+// 		saveUninitialized: true,
+// 		// cookie: {
+// 		// 	sameSite: 'none',
+// 		// 	secure: true,
+// 		// domain: 'chat-app-0iem.onrender.com',
+// 		// 	httpOnly: false,
+// 		// },
+// 		cookie: {
+// 			sameSite: 'none',
+// 			secure: true,
+// 			// domain: 'chat-app-0iem.onrender.com',
+// 		},
+// 		store: MongoStore.create({
+// 			mongoUrl: MONGO_SESSION_URI,
+// 			autoRemove: 'interval',
+// 			autoRemoveInterval: 10,
+// 		}),
+// 		// proxy: true,
+// 	})
+// )
 
 app.use(passport.initialize())
-app.use(passport.session())
+// app.use(passport.session())
 
 /* <-- Routes --> */
-app.use('/auth', authRoutes)
-app.use('/chat', chatRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/chat', chatRoutes)
 
 /* <-- Server --> */
 connection.on('connected', () => {
