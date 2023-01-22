@@ -10,12 +10,9 @@ const socket_io_1 = require("socket.io");
 const mongoose_1 = require("mongoose");
 const http_1 = __importDefault(require("http"));
 const routes_1 = require("./routes");
-const express_session_1 = __importDefault(require("express-session"));
 require("./config/mongoConfig");
+require("./config/authStrategies");
 require("dotenv/config");
-require("./config/passport");
-const connect_mongo_1 = __importDefault(require("connect-mongo"));
-// import './config/authStrategies'
 const app = (0, express_1.default)();
 const port = process.env.PORT || 4000;
 const httpServer = http_1.default.createServer(app);
@@ -57,33 +54,35 @@ app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET;
 const MONGO_SESSION_URI = process.env.MONGO_SESSION_URI;
-app.use((0, express_session_1.default)({
-    secret: EXPRESS_SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    // cookie: {
-    // 	sameSite: 'none',
-    // 	secure: true,
-    // domain: 'chat-app-0iem.onrender.com',
-    // 	httpOnly: false,
-    // },
-    cookie: {
-        sameSite: 'none',
-        secure: true,
-        domain: 'chat-app-0iem.onrender.com',
-    },
-    store: connect_mongo_1.default.create({
-        mongoUrl: MONGO_SESSION_URI,
-        autoRemove: 'interval',
-        autoRemoveInterval: 10,
-    }),
-    // proxy: true,
-}));
+// app.use(
+// 	session({
+// 		secret: EXPRESS_SESSION_SECRET,
+// 		resave: false,
+// 		saveUninitialized: true,
+// 		// cookie: {
+// 		// 	sameSite: 'none',
+// 		// 	secure: true,
+// 		// domain: 'chat-app-0iem.onrender.com',
+// 		// 	httpOnly: false,
+// 		// },
+// 		cookie: {
+// 			sameSite: 'none',
+// 			secure: true,
+// 			// domain: 'chat-app-0iem.onrender.com',
+// 		},
+// 		store: MongoStore.create({
+// 			mongoUrl: MONGO_SESSION_URI,
+// 			autoRemove: 'interval',
+// 			autoRemoveInterval: 10,
+// 		}),
+// 		// proxy: true,
+// 	})
+// )
 app.use(passport_1.default.initialize());
-app.use(passport_1.default.session());
+// app.use(passport.session())
 /* <-- Routes --> */
-app.use('/auth', routes_1.authRoutes);
-app.use('/chat', routes_1.chatRoutes);
+app.use('/api/auth', routes_1.authRoutes);
+app.use('/api/chat', routes_1.chatRoutes);
 /* <-- Server --> */
 mongoose_1.connection.on('connected', () => {
     httpServer.listen(port, () => {

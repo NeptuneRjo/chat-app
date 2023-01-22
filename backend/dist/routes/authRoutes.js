@@ -5,32 +5,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const passport_1 = __importDefault(require("passport"));
-require("dotenv/config");
+const authControllers_1 = require("../controllers/authControllers");
 const router = (0, express_1.Router)();
-const REDIRECT_URL = process.env.REDIRECT_URL;
-// Login and/or Signup
-router.get('/google', passport_1.default.authenticate('google', {
-    scope: ['email', 'profile'],
-}));
-router.get('/logout', (req, res, next) => {
-    req.session.destroy(() => {
-        res.status(200).json({ data: req.user });
-    });
-});
-router.get('/google/callback', passport_1.default.authenticate('google', {
-    failureRedirect: '/auth/failure',
-    // session: false,
-}), (req, res) => {
-    // const user = req.user as any
-    // const token = user.generateJWT()
-    res.cookie('test', 'hello world');
-    res.redirect(REDIRECT_URL);
-});
-router.get('/login', (req, res) => {
-    console.log(req.cookies);
-    res.status(200).json({ data: req.user });
-});
-router.get('/failure', (req, res) => {
-    res.send('something went wrong');
-});
+router.get('/logout', authControllers_1.get_logout_user);
+router.post('/login', passport_1.default.authenticate('local', { session: false }), authControllers_1.post_login_user);
+router.post('/register', authControllers_1.post_register_user);
 exports.default = router;

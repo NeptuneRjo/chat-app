@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const passport_1 = __importDefault(require("passport"));
-const models_1 = require("../models");
+const models_1 = require("../../models");
 const passport_google_oauth2_1 = require("passport-google-oauth2");
 require("dotenv/config");
 /* GOOGLE STRATEGY */
