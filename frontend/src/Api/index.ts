@@ -1,4 +1,11 @@
-export { getUser } from './Auth/getUser'
-export { logoutUser } from './Auth/logoutUser'
+// Chat
 export { getRoom } from './Chat/getRoom'
-export { newMessage } from './Chat/newMessage'
+export { patchNewMessage } from './Chat/patchNewMessage'
+export { deleteRoom } from './Chat/deleteRoom'
+export { patchJoinRoom } from './Chat/patchJoinRoom'
+export { postCreateRoom } from './Chat/postCreateRoom'
+
+// Auth
+export { postRegisterUser } from './Auth/postRegisterUser'
+export { logoutUser } from './Auth/logoutUser'
+export { postLoginUser } from './Auth/postLoginUser'
