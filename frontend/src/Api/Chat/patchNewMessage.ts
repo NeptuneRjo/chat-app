@@ -1,4 +1,4 @@
-export const newMessage = async (
+export const patchNewMessage = async (
 	roomId: string,
 	message: { handle: string; message: string }
 ) => {

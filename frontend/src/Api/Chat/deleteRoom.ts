@@ -1,14 +1,13 @@
-export const getRoom = async (roomId: string) => {
+export const deleteRoom = async (roomId: string, authToken: string) => {
 	const response: Response = await fetch(
 		`${process.env.REACT_APP_API_URL}/api/chat/${roomId}`,
 		{
-			method: 'GET',
+			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
+				'x-auth-token': authToken,
 			},
-			credentials: 'same-origin',
+			credentials: 'include',
 		}
 	)
-
-	return response
 }
