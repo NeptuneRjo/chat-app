@@ -10,4 +10,6 @@ export const patchJoinRoom = async (roomId: string, authToken: string) => {
 			credentials: 'include',
 		}
 	)
+
+	return response
 }

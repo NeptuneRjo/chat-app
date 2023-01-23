@@ -10,4 +10,6 @@ export const postCreateRoom = async (authToken: string) => {
 			credentials: 'include',
 		}
 	)
+
+	return response
 }
