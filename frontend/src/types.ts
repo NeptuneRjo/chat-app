@@ -1,7 +1,7 @@
 export interface RoomInterface {
-	id: string
+	roomId: string
 	messages: MessageInterface[]
-	members: UserInterface[]
+	users: { username: string; owner: boolean }[]
 }
 
 export interface MessageInterface {
@@ -11,7 +11,6 @@ export interface MessageInterface {
 }
 
 export interface UserInterface {
-	googleId: string
-	picture: string
-	displayName: string
+	user: string
+	rooms: RoomInterface[]
 }
