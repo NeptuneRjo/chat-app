@@ -4,7 +4,7 @@ export const postRegisterUser = async (
 	password2: string
 ) => {
 	const response: Response = await fetch(
-		`${process.env.REACT_APP_API_URL}/api/chat/register`,
+		`${process.env.REACT_APP_API_URL}/api/auth/register`,
 		{
 			method: 'POST',
 			headers: {
