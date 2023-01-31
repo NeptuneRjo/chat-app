@@ -5,10 +5,10 @@ import { MessageInterface, UserInterface } from '../../types'
 import { useNavigate, useParams } from 'react-router-dom'
 import './style.css'
 import { getAndSet } from '../../Global/utils'
-import { getRoom, newMessage } from '../../Api'
+import { getRoom, patchNewMessage } from '../../Api'
 
 type Props = {
-	user: UserInterface | undefined
+	user: UserInterface | null
 	socket: any
 }
 
@@ -66,11 +66,15 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 
 	const submitMessage = async () => {
 		const message = {
-			handle: user?.displayName as string,
+			handle: user?.user as string,
 			message: text,
 		}
 
-		const { data, error } = await getAndSet(newMessage, id as string, message)
+		const { data, error } = await getAndSet(
+			patchNewMessage,
+			id as string,
+			message
+		)
 
 		data ? setNewMessages(data.messages) : setRoomError(error)
 	}
@@ -86,12 +90,12 @@ const Room: React.FC<Props> = ({ user, socket }: Props) => {
 				{messages.map((message, key) => (
 					<Row key={key} id='chat-item' className='h-25'>
 						<Col id='chat-incoming'>
-							{message.handle !== user?.displayName && (
+							{message.handle !== user?.user && (
 								<Message message={message} user={false} />
 							)}
 						</Col>
 						<Col id='chat-outgoing'>
-							{message.handle === user?.displayName && (
+							{message.handle === user?.user && (
 								<Message message={message} user={true} />
 							)}
 						</Col>

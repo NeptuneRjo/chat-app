@@ -2,18 +2,19 @@ import React from 'react'
 import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap'
 import { UserInterface } from '../../types'
 import { logoutUser } from '../../Api'
-import { getAndSet } from '../../Global/utils'
+import { getAndSet, defineSessionStorage } from '../../Global/utils'
 
 type Props = {
-	user: UserInterface | undefined
-	setUser: React.Dispatch<React.SetStateAction<UserInterface | undefined>>
+	user: UserInterface | null
+	setUser: React.Dispatch<React.SetStateAction<UserInterface | null>>
 }
 
 const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	const logout = async () => {
 		const { data, error } = await getAndSet(logoutUser)
 
-		setUser(undefined)
+		setUser(null)
+		defineSessionStorage('', null)
 
 		if (error) {
 			console.log(error)
@@ -23,7 +24,9 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 	return (
 		<Navbar expand='lg' bg='primary' variant='dark'>
 			<Container>
-				<Navbar.Brand href='#/chat/room-1'>Harmony</Navbar.Brand>
+				<Navbar.Brand href={`${user ? '#/chat/room-1' : ''}`}>
+					Harmony
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='me-auto'>
@@ -32,14 +35,14 @@ const Menu: React.FC<Props> = ({ user, setUser }: Props) => {
 							<NavDropdown.Item href='#/chat/room-2'>Room 2</NavDropdown.Item>
 							<NavDropdown.Item href='#/chat/room-3'>Room 3</NavDropdown.Item>
 						</NavDropdown>
-						{user === undefined ? (
+						{user === null ? (
 							<Nav.Link href={`${process.env.REACT_APP_API_URL}/auth/google`}>
 								Sign in
 							</Nav.Link>
 						) : (
 							<Navbar.Collapse className='justify-content-end'>
 								<Navbar.Text className='text-white'>
-									Signed in as {user.displayName}
+									Signed in as {user.user}
 								</Navbar.Text>
 								<Nav.Link onClick={() => logout()}>Sign Out</Nav.Link>
 							</Navbar.Collapse>
